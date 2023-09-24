@@ -1,0 +1,1373 @@
+{
+  "new_image": {
+    "pntr_name": "pntr_gen_image_color",
+    "pntr_args": {
+      "width": "int",
+      "height": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "width": "i32",
+      "height": "i32",
+      "color": "u32"
+    },
+    "returns": "u32"
+  },
+  "image_copy": {
+    "pntr_name": "pntr_image_copy",
+    "pntr_args": {
+      "image": "pntr_image*"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "image": "u32"
+    },
+    "returns": "u32"
+  },
+  "image_subimage": {
+    "pntr_name": "pntr_image_subimage",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "x": "int",
+      "y": "int",
+      "width": "int",
+      "height": "int"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "image": "u32",
+      "x": "i32",
+      "y": "i32",
+      "width": "i32",
+      "height": "i32"
+    },
+    "returns": "u32"
+  },
+  "unload_image": {
+    "pntr_name": "pntr_unload_image",
+    "pntr_args": {
+      "image": "pntr_image*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32"
+    },
+    "returns": "void"
+  },
+  "clear_background": {
+    "pntr_name": "pntr_clear_background",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_point": {
+    "pntr_name": "pntr_draw_point",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "x": "int",
+      "y": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "x": "i32",
+      "y": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_line": {
+    "pntr_name": "pntr_draw_line",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "startPosX": "int",
+      "startPosY": "int",
+      "endPosX": "int",
+      "endPosY": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "startPosX": "i32",
+      "startPosY": "i32",
+      "endPosX": "i32",
+      "endPosY": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_rectangle_outline": {
+    "pntr_name": "pntr_draw_rectangle",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "posX": "int",
+      "posY": "int",
+      "width": "int",
+      "height": "int",
+      "thickness": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "posX": "i32",
+      "posY": "i32",
+      "width": "i32",
+      "height": "i32",
+      "thickness": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_rectangle": {
+    "pntr_name": "pntr_draw_rectangle_fill",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "posX": "int",
+      "posY": "int",
+      "width": "int",
+      "height": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "posX": "i32",
+      "posY": "i32",
+      "width": "i32",
+      "height": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_triangle_outline": {
+    "pntr_name": "pntr_draw_triangle",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "x1": "int",
+      "y1": "int",
+      "x2": "int",
+      "y2": "int",
+      "x3": "int",
+      "y3": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "x1": "i32",
+      "y1": "i32",
+      "x2": "i32",
+      "y2": "i32",
+      "x3": "i32",
+      "y3": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_triangle": {
+    "pntr_name": "pntr_draw_triangle_fill",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "x1": "int",
+      "y1": "int",
+      "x2": "int",
+      "y2": "int",
+      "x3": "int",
+      "y3": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "x1": "i32",
+      "y1": "i32",
+      "x2": "i32",
+      "y2": "i32",
+      "x3": "i32",
+      "y3": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_ellipse_outline": {
+    "pntr_name": "pntr_draw_ellipse",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "centerX": "int",
+      "centerY": "int",
+      "radiusX": "int",
+      "radiusY": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "centerX": "i32",
+      "centerY": "i32",
+      "radiusX": "i32",
+      "radiusY": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_ellipse": {
+    "pntr_name": "pntr_draw_ellipse_fill",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "centerX": "int",
+      "centerY": "int",
+      "radiusX": "int",
+      "radiusY": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "centerX": "i32",
+      "centerY": "i32",
+      "radiusX": "i32",
+      "radiusY": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_circle_outline": {
+    "pntr_name": "pntr_draw_circle",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "centerX": "int",
+      "centerY": "int",
+      "radius": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "centerX": "i32",
+      "centerY": "i32",
+      "radius": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_circle": {
+    "pntr_name": "pntr_draw_circle_fill",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "centerX": "int",
+      "centerY": "int",
+      "radius": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "centerX": "i32",
+      "centerY": "i32",
+      "radius": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_polygon_outline": {
+    "pntr_name": "pntr_draw_polygon",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "points": "pntr_vector*",
+      "numPoints": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "points": "Vec2*",
+      "numPoints": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_polygon": {
+    "pntr_name": "pntr_draw_polygon_fill",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "points": "pntr_vector*",
+      "numPoints": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "points": "Vec2*",
+      "numPoints": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_polyline": {
+    "pntr_name": "pntr_draw_polyline",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "points": "pntr_vector*",
+      "numPoints": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "points": "Vec2*",
+      "numPoints": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_arc_outline": {
+    "pntr_name": "pntr_draw_arc",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "centerX": "int",
+      "centerY": "int",
+      "radius": "float",
+      "startAngle": "float",
+      "endAngle": "float",
+      "segments": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "centerX": "i32",
+      "centerY": "i32",
+      "radius": "f32",
+      "startAngle": "f32",
+      "endAngle": "f32",
+      "segments": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_arc": {
+    "pntr_name": "pntr_draw_arc_fill",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "centerX": "int",
+      "centerY": "int",
+      "radius": "float",
+      "startAngle": "float",
+      "endAngle": "float",
+      "segments": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "centerX": "i32",
+      "centerY": "i32",
+      "radius": "f32",
+      "startAngle": "f32",
+      "endAngle": "f32",
+      "segments": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_rectangle_rounded_outline": {
+    "pntr_name": "pntr_draw_rectangle_rounded",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "x": "int",
+      "y": "int",
+      "width": "int",
+      "height": "int",
+      "topLeftRadius": "int",
+      "topRightRadius": "int",
+      "bottomLeftRadius": "int",
+      "bottomRightRadius": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "x": "i32",
+      "y": "i32",
+      "width": "i32",
+      "height": "i32",
+      "topLeftRadius": "i32",
+      "topRightRadius": "i32",
+      "bottomLeftRadius": "i32",
+      "bottomRightRadius": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_rectangle_rounded": {
+    "pntr_name": "pntr_draw_rectangle_rounded_fill",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "x": "int",
+      "y": "int",
+      "width": "int",
+      "height": "int",
+      "cornerRadius": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "x": "i32",
+      "y": "i32",
+      "width": "i32",
+      "height": "i32",
+      "cornerRadius": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_image": {
+    "pntr_name": "pntr_draw_image",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "src": "pntr_image*",
+      "posX": "int",
+      "posY": "int"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "src": "u32",
+      "posX": "i32",
+      "posY": "i32"
+    },
+    "returns": "void"
+  },
+  "draw_image_tint": {
+    "pntr_name": "pntr_draw_image_tint",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "src": "pntr_image*",
+      "posX": "int",
+      "posY": "int",
+      "tint": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "src": "u32",
+      "posX": "i32",
+      "posY": "i32",
+      "tint": "u32"
+    },
+    "returns": "void"
+  },
+  "draw_image_rotated": {
+    "pntr_name": "pntr_draw_image_rotated",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "src": "pntr_image*",
+      "posX": "int",
+      "posY": "int",
+      "degrees": "float",
+      "offsetX": "float",
+      "offsetY": "float",
+      "filter": "pntr_filter"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "src": "u32",
+      "posX": "i32",
+      "posY": "i32",
+      "degrees": "f32",
+      "offsetX": "f32",
+      "offsetY": "f32",
+      "filter": "pntr_filter"
+    },
+    "returns": "void"
+  },
+  "draw_image_flipped": {
+    "pntr_name": "pntr_draw_image_flipped",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "src": "pntr_image*",
+      "posX": "int",
+      "posY": "int",
+      "flipHorizontal": "bool",
+      "flipVertical": "bool"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "src": "u32",
+      "posX": "i32",
+      "posY": "i32",
+      "flipHorizontal": "bool",
+      "flipVertical": "bool"
+    },
+    "returns": "void"
+  },
+  "draw_image_scaled": {
+    "pntr_name": "pntr_draw_image_scaled",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "src": "pntr_image*",
+      "posX": "int",
+      "posY": "int",
+      "scaleX": "float",
+      "scaleY": "float",
+      "offsetX": "float",
+      "offsetY": "float",
+      "filter": "pntr_filter"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "src": "u32",
+      "posX": "i32",
+      "posY": "i32",
+      "scaleX": "f32",
+      "scaleY": "f32",
+      "offsetX": "f32",
+      "offsetY": "f32",
+      "filter": "pntr_filter"
+    },
+    "returns": "void"
+  },
+  "draw_text": {
+    "pntr_name": "pntr_draw_text",
+    "pntr_args": {
+      "dst": "pntr_image*",
+      "font": "pntr_font*",
+      "text": "const char*",
+      "posX": "int",
+      "posY": "int",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "font": "pntr_font*",
+      "text": "const char*",
+      "posX": "i32",
+      "posY": "i32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "save_file": {
+    "pntr_name": "pntr_save_file",
+    "pntr_args": {
+      "fileName": "const char*",
+      "data": "const void*",
+      "bytesToWrite": "unsigned int"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "fileName": "const char*",
+      "data": "const void*",
+      "bytesToWrite": "unsigned int"
+    },
+    "returns": "bool"
+  },
+  "save_image": {
+    "pntr_name": "pntr_save_image",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "fileName": "const char*"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "image": "u32",
+      "fileName": "const char*"
+    },
+    "returns": "bool"
+  },
+  "load_image": {
+    "pntr_name": "pntr_load_image",
+    "pntr_args": {
+      "fileName": "const char*"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "fileName": "const char*"
+    },
+    "returns": "u32"
+  },
+  "image_resize": {
+    "pntr_name": "pntr_image_resize_canvas",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "newWidth": "int",
+      "newHeight": "int",
+      "offsetX": "int",
+      "offsetY": "int",
+      "fill": "pntr_color"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "image": "u32",
+      "newWidth": "i32",
+      "newHeight": "i32",
+      "offsetX": "i32",
+      "offsetY": "i32",
+      "fill": "u32"
+    },
+    "returns": "bool"
+  },
+  "image_scale": {
+    "pntr_name": "pntr_image_scale",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "scaleX": "float",
+      "scaleY": "float",
+      "filter": "pntr_filter"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "image": "u32",
+      "scaleX": "f32",
+      "scaleY": "f32",
+      "filter": "pntr_filter"
+    },
+    "returns": "u32"
+  },
+  "image_color_replace": {
+    "pntr_name": "pntr_image_color_replace",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "color": "pntr_color",
+      "replace": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "color": "u32",
+      "replace": "u32"
+    },
+    "returns": "void"
+  },
+  "color_tint": {
+    "pntr_name": "pntr_color_tint",
+    "pntr_args": {
+      "color": "pntr_color",
+      "tint": "pntr_color"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "color": "u32",
+      "tint": "u32"
+    },
+    "returns": "u32"
+  },
+  "image_color_tint": {
+    "pntr_name": "pntr_image_color_tint",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "color": "pntr_color"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "color": "u32"
+    },
+    "returns": "void"
+  },
+  "color_fade": {
+    "pntr_name": "pntr_color_fade",
+    "pntr_args": {
+      "color": "pntr_color",
+      "alpha": "float"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "color": "u32",
+      "alpha": "f32"
+    },
+    "returns": "u32"
+  },
+  "image_color_fade": {
+    "pntr_name": "pntr_image_color_fade",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "alpha": "float"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "alpha": "f32"
+    },
+    "returns": "void"
+  },
+  "color_brightness": {
+    "pntr_name": "pntr_color_brightness",
+    "pntr_args": {
+      "color": "pntr_color",
+      "factor": "float"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "color": "u32",
+      "factor": "f32"
+    },
+    "returns": "u32"
+  },
+  "get_pixel_color": {
+    "pntr_name": "pntr_get_pixel_color",
+    "pntr_args": {
+      "srcPtr": "void*",
+      "srcPixelFormat": "pntr_pixelformat"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "srcPtr": "void*",
+      "srcPixelFormat": "pntr_pixelformat"
+    },
+    "returns": "u32"
+  },
+  "load_font_default": {
+    "pntr_name": "pntr_load_font_default",
+    "pntr_args": {
+      "void": ""
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "void": ""
+    },
+    "returns": "pntr_font*"
+  },
+  "unload_font": {
+    "pntr_name": "pntr_unload_font",
+    "pntr_args": {
+      "font": "pntr_font*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "font": "pntr_font*"
+    },
+    "returns": "void"
+  },
+  "font_copy": {
+    "pntr_name": "pntr_font_copy",
+    "pntr_args": {
+      "font": "pntr_font*"
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "font": "pntr_font*"
+    },
+    "returns": "pntr_font*"
+  },
+  "font_scale": {
+    "pntr_name": "pntr_font_scale",
+    "pntr_args": {
+      "font": "pntr_font*",
+      "scaleX": "float",
+      "scaleY": "float",
+      "filter": "pntr_filter"
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "font": "pntr_font*",
+      "scaleX": "f32",
+      "scaleY": "f32",
+      "filter": "pntr_filter"
+    },
+    "returns": "pntr_font*"
+  },
+  "load_font_bmf": {
+    "pntr_name": "pntr_load_font_bmf",
+    "pntr_args": {
+      "fileName": "const char*",
+      "characters": "const char*"
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "fileName": "const char*",
+      "characters": "const char*"
+    },
+    "returns": "pntr_font*"
+  },
+  "load_font_bmf_from_image": {
+    "pntr_name": "pntr_load_font_bmf_from_image",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "characters": "const char*"
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "image": "u32",
+      "characters": "const char*"
+    },
+    "returns": "pntr_font*"
+  },
+  "measure_text": {
+    "pntr_name": "pntr_measure_text",
+    "pntr_args": {
+      "font": "pntr_font*",
+      "text": "const char*"
+    },
+    "pntr_returns": "int",
+    "args": {
+      "font": "pntr_font*",
+      "text": "const char*"
+    },
+    "returns": "i32"
+  },
+  "gen_image_text": {
+    "pntr_name": "pntr_gen_image_text",
+    "pntr_args": {
+      "font": "pntr_font*",
+      "text": "const char*",
+      "tint": "pntr_color"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "font": "pntr_font*",
+      "text": "const char*",
+      "tint": "u32"
+    },
+    "returns": "u32"
+  },
+  "load_font_tty": {
+    "pntr_name": "pntr_load_font_tty",
+    "pntr_args": {
+      "fileName": "const char*",
+      "glyphWidth": "int",
+      "glyphHeight": "int",
+      "characters": "const char*"
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "fileName": "const char*",
+      "glyphWidth": "i32",
+      "glyphHeight": "i32",
+      "characters": "const char*"
+    },
+    "returns": "pntr_font*"
+  },
+  "load_font_tty_from_image": {
+    "pntr_name": "pntr_load_font_tty_from_image",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "glyphWidth": "int",
+      "glyphHeight": "int",
+      "characters": "const char*"
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "image": "u32",
+      "glyphWidth": "i32",
+      "glyphHeight": "i32",
+      "characters": "const char*"
+    },
+    "returns": "pntr_font*"
+  },
+  "load_file": {
+    "pntr_name": "pntr_load_file",
+    "pntr_args": {
+      "fileName": "const char*",
+      "bytesRead": "unsigned int*"
+    },
+    "pntr_returns": "unsigned char*",
+    "args": {
+      "fileName": "const char*",
+      "bytesRead": "unsigned int*"
+    },
+    "returns": "unsigned char*"
+  },
+  "unload_file": {
+    "pntr_name": "pntr_unload_file",
+    "pntr_args": {
+      "fileData": "unsigned char*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "fileData": "unsigned char*"
+    },
+    "returns": "void"
+  },
+  "load_file_text": {
+    "pntr_name": "pntr_load_file_text",
+    "pntr_args": {
+      "fileName": "const char*"
+    },
+    "pntr_returns": "const char*",
+    "args": {
+      "fileName": "const char*"
+    },
+    "returns": "const char*"
+  },
+  "unload_file_text": {
+    "pntr_name": "pntr_unload_file_text",
+    "pntr_args": {
+      "text": "const char*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "text": "const char*"
+    },
+    "returns": "void"
+  },
+  "load_font_ttf": {
+    "pntr_name": "pntr_load_font_ttf",
+    "pntr_args": {
+      "fileName": "const char*",
+      "fontSize": "int"
+    },
+    "pntr_returns": "pntr_font*",
+    "args": {
+      "fileName": "const char*",
+      "fontSize": "i32"
+    },
+    "returns": "pntr_font*"
+  },
+  "color_invert": {
+    "pntr_name": "pntr_color_invert",
+    "pntr_args": {
+      "color": "pntr_color"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "color": "u32"
+    },
+    "returns": "u32"
+  },
+  "image_color_invert": {
+    "pntr_name": "pntr_image_color_invert",
+    "pntr_args": {
+      "image": "pntr_image*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32"
+    },
+    "returns": "void"
+  },
+  "color_alpha_blend": {
+    "pntr_name": "pntr_color_alpha_blend",
+    "pntr_args": {
+      "dst": "pntr_color",
+      "src": "pntr_color"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "dst": "u32",
+      "src": "u32"
+    },
+    "returns": "u32"
+  },
+  "image_alpha_border": {
+    "pntr_name": "pntr_image_alpha_border",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "threshold": "float"
+    },
+    "pntr_returns": "pntr_rectangle",
+    "args": {
+      "image": "u32",
+      "threshold": "f32"
+    },
+    "returns": "pntr_rectangle"
+  },
+  "image_crop": {
+    "pntr_name": "pntr_image_crop",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "x": "int",
+      "y": "int",
+      "width": "int",
+      "height": "int"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "image": "u32",
+      "x": "i32",
+      "y": "i32",
+      "width": "i32",
+      "height": "i32"
+    },
+    "returns": "bool"
+  },
+  "image_alpha_crop": {
+    "pntr_name": "pntr_image_alpha_crop",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "threshold": "float"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "threshold": "f32"
+    },
+    "returns": "void"
+  },
+  "image_color_brightness": {
+    "pntr_name": "pntr_image_color_brightness",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "factor": "float"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "factor": "f32"
+    },
+    "returns": "void"
+  },
+  "image_flip": {
+    "pntr_name": "pntr_image_flip",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "horizontal": "bool",
+      "vertical": "bool"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "horizontal": "bool",
+      "vertical": "bool"
+    },
+    "returns": "void"
+  },
+  "color_contrast": {
+    "pntr_name": "pntr_color_contrast",
+    "pntr_args": {
+      "color": "pntr_color",
+      "contrast": "float"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "color": "u32",
+      "contrast": "f32"
+    },
+    "returns": "u32"
+  },
+  "image_color_contrast": {
+    "pntr_name": "pntr_image_color_contrast",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "contrast": "float"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "contrast": "f32"
+    },
+    "returns": "void"
+  },
+  "image_alpha_mask": {
+    "pntr_name": "pntr_image_alpha_mask",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "alphaMask": "pntr_image*",
+      "posX": "int",
+      "posY": "int"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "image": "u32",
+      "alphaMask": "u32",
+      "posX": "i32",
+      "posY": "i32"
+    },
+    "returns": "void"
+  },
+  "image_rotate": {
+    "pntr_name": "pntr_image_rotate",
+    "pntr_args": {
+      "image": "pntr_image*",
+      "degrees": "float",
+      "filter": "pntr_filter"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "image": "u32",
+      "degrees": "f32",
+      "filter": "pntr_filter"
+    },
+    "returns": "u32"
+  },
+  "image_gradient": {
+    "pntr_name": "pntr_gen_image_gradient",
+    "pntr_args": {
+      "width": "int",
+      "height": "int",
+      "topLeft": "pntr_color",
+      "topRight": "pntr_color",
+      "bottomLeft": "pntr_color",
+      "bottomRight": "pntr_color"
+    },
+    "pntr_returns": "pntr_image*",
+    "args": {
+      "width": "i32",
+      "height": "i32",
+      "topLeft": "u32",
+      "topRight": "u32",
+      "bottomLeft": "u32",
+      "bottomRight": "u32"
+    },
+    "returns": "u32"
+  },
+  "color_bilinear_interpolate": {
+    "pntr_name": "pntr_color_bilinear_interpolate",
+    "pntr_args": {
+      "color00": "pntr_color",
+      "color01": "pntr_color",
+      "color10": "pntr_color",
+      "color11": "pntr_color",
+      "coordinateX": "float",
+      "coordinateY": "float"
+    },
+    "pntr_returns": "pntr_color",
+    "args": {
+      "color00": "u32",
+      "color01": "u32",
+      "color10": "u32",
+      "color11": "u32",
+      "coordinateX": "f32",
+      "coordinateY": "f32"
+    },
+    "returns": "u32"
+  },
+  "load_sound": {
+    "pntr_name": "pntr_load_sound",
+    "pntr_args": {
+      "fileName": "const char*"
+    },
+    "pntr_returns": "pntr_sound*",
+    "args": {
+      "fileName": "const char*"
+    },
+    "returns": "pntr_sound*"
+  },
+  "unload_sound": {
+    "pntr_name": "pntr_unload_sound",
+    "pntr_args": {
+      "sound": "pntr_sound*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "sound": "pntr_sound*"
+    },
+    "returns": "void"
+  },
+  "play_sound": {
+    "pntr_name": "pntr_play_sound",
+    "pntr_args": {
+      "sound": "pntr_sound*",
+      "loop": "bool"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "sound": "pntr_sound*",
+      "loop": "bool"
+    },
+    "returns": "void"
+  },
+  "stop_sound": {
+    "pntr_name": "pntr_stop_sound",
+    "pntr_args": {
+      "sound": "pntr_sound*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "sound": "pntr_sound*"
+    },
+    "returns": "void"
+  },
+  "delta_time": {
+    "pntr_name": "pntr_app_delta_time",
+    "pntr_args": {
+      "app": "pntr_app*"
+    },
+    "pntr_returns": "float",
+    "args": {},
+    "returns": "f32"
+  },
+  "key_pressed": {
+    "pntr_name": "pntr_app_key_pressed",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "key": "pntr_app_key"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "key": "pntr_app_key"
+    },
+    "returns": "bool"
+  },
+  "key_down": {
+    "pntr_name": "pntr_app_key_down",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "key": "pntr_app_key"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "key": "pntr_app_key"
+    },
+    "returns": "bool"
+  },
+  "key_released": {
+    "pntr_name": "pntr_app_key_released",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "key": "pntr_app_key"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "key": "pntr_app_key"
+    },
+    "returns": "bool"
+  },
+  "key_up": {
+    "pntr_name": "pntr_app_key_up",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "key": "pntr_app_key"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "key": "pntr_app_key"
+    },
+    "returns": "bool"
+  },
+  "gamepad_button_pressed": {
+    "pntr_name": "pntr_app_gamepad_button_pressed",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "gamepad": "int",
+      "key": "pntr_app_gamepad_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "gamepad": "i32",
+      "key": "pntr_app_gamepad_button"
+    },
+    "returns": "bool"
+  },
+  "gamepad_button_down": {
+    "pntr_name": "pntr_app_gamepad_button_down",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "gamepad": "int",
+      "key": "pntr_app_gamepad_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "gamepad": "i32",
+      "key": "pntr_app_gamepad_button"
+    },
+    "returns": "bool"
+  },
+  "gamepad_button_released": {
+    "pntr_name": "pntr_app_gamepad_button_released",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "gamepad": "int",
+      "key": "pntr_app_gamepad_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "gamepad": "i32",
+      "key": "pntr_app_gamepad_button"
+    },
+    "returns": "bool"
+  },
+  "gamepad_button_up": {
+    "pntr_name": "pntr_app_gamepad_button_up",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "gamepad": "int",
+      "key": "pntr_app_gamepad_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "gamepad": "i32",
+      "key": "pntr_app_gamepad_button"
+    },
+    "returns": "bool"
+  },
+  "mouse_x": {
+    "pntr_name": "pntr_app_mouse_x",
+    "pntr_args": {
+      "app": "pntr_app*"
+    },
+    "pntr_returns": "int",
+    "args": {},
+    "returns": "i32"
+  },
+  "mouse_y": {
+    "pntr_name": "pntr_app_mouse_y",
+    "pntr_args": {
+      "app": "pntr_app*"
+    },
+    "pntr_returns": "int",
+    "args": {},
+    "returns": "i32"
+  },
+  "mouse_delta_x": {
+    "pntr_name": "pntr_app_mouse_delta_x",
+    "pntr_args": {
+      "app": "pntr_app*"
+    },
+    "pntr_returns": "int",
+    "args": {},
+    "returns": "i32"
+  },
+  "mouse_delta_y": {
+    "pntr_name": "pntr_app_mouse_delta_y",
+    "pntr_args": {
+      "app": "pntr_app*"
+    },
+    "pntr_returns": "int",
+    "args": {},
+    "returns": "i32"
+  },
+  "mouse_button_pressed": {
+    "pntr_name": "pntr_app_mouse_button_pressed",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "button": "pntr_app_mouse_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "button": "pntr_app_mouse_button"
+    },
+    "returns": "bool"
+  },
+  "mouse_button_down": {
+    "pntr_name": "pntr_app_mouse_button_down",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "button": "pntr_app_mouse_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "button": "pntr_app_mouse_button"
+    },
+    "returns": "bool"
+  },
+  "mouse_button_released": {
+    "pntr_name": "pntr_app_mouse_button_released",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "button": "pntr_app_mouse_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "button": "pntr_app_mouse_button"
+    },
+    "returns": "bool"
+  },
+  "mouse_button_up": {
+    "pntr_name": "pntr_app_mouse_button_up",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "button": "pntr_app_mouse_button"
+    },
+    "pntr_returns": "bool",
+    "args": {
+      "button": "pntr_app_mouse_button"
+    },
+    "returns": "bool"
+  },
+  "set_title": {
+    "pntr_name": "pntr_app_set_title",
+    "pntr_args": {
+      "app": "pntr_app*",
+      "title": "const char*"
+    },
+    "pntr_returns": "void",
+    "args": {
+      "title": "const char*"
+    },
+    "returns": "void"
+  }
+}
