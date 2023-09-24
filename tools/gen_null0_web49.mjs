@@ -6,16 +6,26 @@ function indent(str, numOfIndents=0, opt_spacesPerIndent=2) {
   str = str.replace(/^(?=.)/gm, new Array(numOfIndents + 1).join('\t'));
   numOfIndents = new Array(opt_spacesPerIndent + 1 || 0).join(' '); // re-use
   return opt_spacesPerIndent
-    ? str.replace(/^\t+/g, function(tabs) {
-        return tabs.replace(/./g, numOfIndents);
-    })
-    : str;
+  ? str.replace(/^\t+/g, function(tabs) {
+    return tabs.replace(/./g, numOfIndents);
+  })
+  : str;
+}
+
+function web49map_ret(func) {
+  const m = {}
+
+  if (m[func.retuns]) {
+    return `return (web49_interp_data_t){.${m[func.returns]} = retVal};`
+  }else{
+    return `// unmapped: ${func.returns}`
+  }
 }
 
 function getArgs(func) {
   let out = []
 
-  if (func.pntr_args['app'] === 'pntr_app*') {
+  if (func.pntr_args['app'] === '  pntr_app*') {
     out.push('pntr_app* app = null0_app;')
   }
 
@@ -33,12 +43,15 @@ static web49_interp_data_t wasi_import_generic(void* wasi_untyped, web49_interp_
 for (const name of Object.keys(api)) {
   const func = api[name]
 
-  let body = getArgs(func)
-  body += func.returns === 'void' ? '' : `${func.returns} retVal = `
-  body += `${func.pntr_name}(${Object.keys(func.pntr_args).join(', ')});`
+  let body = `${func.pntr_name}(${Object.keys(func.pntr_args).join(', ')});`
+
+  if (func.returns !== 'void') {
+    body = `${func.returns} retVal = ${body}\n  ${web49map_ret(func)}\n`
+  }
 
   out += `
 static web49_interp_data_t null0_wasmimport_${name}(void* wasi_untyped, web49_interp_t interp) {
+${getArgs(func)}
   ${body}
 }
 `
