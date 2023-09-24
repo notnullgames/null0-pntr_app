@@ -1,35 +1,61 @@
 // this will generate the web49 header for null0
 
+import { writeFile } from 'fs/promises'
 import api from '../api_null0.json' assert { type: 'json' }
 
-function indent(str, numOfIndents=0, opt_spacesPerIndent=2) {
-  str = str.replace(/^(?=.)/gm, new Array(numOfIndents + 1).join('\t'));
-  numOfIndents = new Array(opt_spacesPerIndent + 1 || 0).join(' '); // re-use
-  return opt_spacesPerIndent
-  ? str.replace(/^\t+/g, function(tabs) {
-    return tabs.replace(/./g, numOfIndents);
-  })
-  : str;
+const indent = (str, numOfIndents=1) => str.split('\n').map(l => ' '.repeat(numOfIndents*2) + l.trim()).join('\n') + '\n'
+
+const web49Map = {
+  u8: 'i32_u',
+  bool: 'i32_u',
+  u32: 'i32_u',
+  i32: 'i32_s',
+  u16: 'i32_u',
+  i16: 'i32_s',
+  u64: 'i64_u',
+  i64: 'i64_s',
+  f32: 'f32',
+  f64: 'f64',
+  void: 'void',
+  pntr_filter: 'i32_u',
+  pntr_app_gamepad_button: 'i32_u'
 }
 
-function web49map_ret(func) {
-  const m = {}
-
-  if (m[func.retuns]) {
-    return `return (web49_interp_data_t){.${m[func.returns]} = retVal};`
-  }else{
-    return `// unmapped: ${func.returns}`
+function get_wasm_args(func) {
+  const params = func.args
+  if (Object.keys(params).length == 0) {
+    return ''
   }
+  return '\n  ' + Object.keys(params).map((p, i) => {
+    if (params[p] === 'pntr_sound*') {
+      return `${params[p]} ${p} = null0_sounds[ interp.locals[${i}].${web49Map[params[p]]} ];`
+    }
+    if (params[p] === 'pntr_image*') {
+      return `${params[p]} ${p} = null0_images[ interp.locals[${i}].${web49Map[params[p]]} ];`
+    }
+    if (params[p] === 'pntr_font*') {
+      return `${params[p]} ${p} = null0_fonts[ interp.locals[${i}].${web49Map[params[p]]} ];`
+    }
+    if (params[p].includes('*')) {
+      return `${params[p]} ${p} = (${params[p]}) interp.memory[interp.locals[${i}].i32_u];`
+    }
+    return `${params[p]} ${p} = interp.locals[${i}].${web49Map[params[p]]};`
+  }).join('\n  ')
 }
 
-function getArgs(func) {
-  let out = []
-
-  if (func.pntr_args['app'] === '  pntr_app*') {
-    out.push('pntr_app* app = null0_app;')
+function get_wasm_call(func) {
+  const args = Object.keys(func.pntr_args)
+  if (args[0] === 'app') {
+    args[0] = 'null0->app'
   }
-
-  return out.length ? indent((out.join('\n') + '\n  ')) : ''
+  if (args[0] === 'dst' && func.name.startsWith('draw_')) {
+    args[0] = 'null0->screen'
+  }
+  if (func.returns === 'void') {
+    return `${func.pntr_name}(${args.join(', ')});\n`
+  }
+  return `${func.returns} retVal = ${func.pntr_name}(${args.join(', ')});`
+  return ''
 }
 
 
@@ -38,23 +64,38 @@ let out = `// Null0 web49 host-bindings generated at ${new Date().toISOString()}
 static web49_interp_data_t wasi_import_generic(void* wasi_untyped, web49_interp_t interp) {
   printf("Unkown import called\\n");
 }
+
 `
+
+const tests = []
 
 for (const name of Object.keys(api)) {
-  const func = api[name]
+  const func = {name, ...api[name]}
+  out += `static web49_interp_data_t wasmimport_${name}(void* wasi_untyped, web49_interp_t interp) {`
+  out += indent(get_wasm_args(func))
+  out += indent(get_wasm_call(func))
+  out += '}\n\n'
+  tests.push(`(strcmp(func, "${name}") == 0){\n      ret = &wasmimport_${name};\n    }`)
+}
 
-  let body = `${func.pntr_name}(${Object.keys(func.pntr_args).join(', ')});`
-
-  if (func.returns !== 'void') {
-    body = `${func.returns} retVal = ${body}\n  ${web49map_ret(func)}\n`
+out += `
+web49_env_func_t web49_api_null0(void* state, const char* mod, const char* func) {
+  web49_env_func_t ret = &wasi_import_generic;
+  if (!strcmp(mod, "null0")) {
+    if ${tests.join(' else if ')}
   }
+  return web49_env_new(state, ret);
+}
 
-  out += `
-static web49_interp_data_t null0_wasmimport_${name}(void* wasi_untyped, web49_interp_t interp) {
-${getArgs(func)}
-  ${body}
+web49_env_func_t web49_main_import_func(void* state, const char* mod, const char* func) {
+  if (strcmp(mod, "null0") == 0) {
+    return web49_api_null0(state, mod, func);
+  } else if (strcmp(mod, "wasi_snapshot_preview1") == 0) {
+    return web49_api_wasi(state, mod, func);
+  }
+  fprintf(stderr, "Unhandled import: %s.%s\\n", mod, func);
+  return NULL;
 }
 `
-}
 
-console.log(out)
+await writeFile('src/null0_wasm.h', out)

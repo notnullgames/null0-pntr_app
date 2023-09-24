@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.11)
-project(pntr_app_starter
-    DESCRIPTION "pntr_app_starter"
-    HOMEPAGE_URL "https://github.com/robloach/pntr_app_starter"
+project(null0
+    DESCRIPTION "null0"
+    HOMEPAGE_URL "https://github.com/notnullgames/null0"
     VERSION 0.0.1
     LANGUAGES C
 )
@@ -12,10 +12,10 @@ option(LIBRETRO "Build libretro" TRUE)
 option(CLI "Build CLI" TRUE)
 option(WEB "Build Web" TRUE)
 
-set(SOURCES
-    src/main.c
-)
-
-# Have pntr_app_starter build the project
 list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/.cmake")
+
+find_package(web49 REQUIRED)
+find_package(mattiasgustavssonlib REQUIRED)
+set(SOURCES src/main.c)
+
 find_package(pntr_app_starter)
