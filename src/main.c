@@ -38,6 +38,9 @@ typedef struct AppData {
 // struct of all your game state
 AppData* null0;
 
+// web49 interptretor
+web49_interp_t interp;
+
 // the filename of your cart
 char* cartName = NULL;
 
@@ -148,7 +151,7 @@ bool Init(pntr_app* app) {
   web49_opt_tee_module(&mod);
   web49_opt_tree_module(&mod);
 
-  web49_interp_t interp = web49_interp_module(mod);
+  interp = web49_interp_module(mod);
 
   web49_interp_add_import_func(&interp, NULL, &web49_main_import_func);
 
@@ -166,8 +169,12 @@ bool Update(pntr_app* app, pntr_image* screen) {
   null0->screen = screen;
   null0->app = app;
 
-  pntr_clear_background(screen, PNTR_RAYWHITE);
-  pntr_draw_text(screen, null0->font, "HELLO!", 140, 110, PNTR_DARKGRAY);
+  // pntr_clear_background(screen, PNTR_RAYWHITE);
+  // pntr_draw_text(screen, null0->font, "HELLO!", 140, 110, PNTR_DARKGRAY);
+
+  if (null0->cart_update) {
+    web49_interp_block_run(&interp, &interp.funcs[null0->cart_update]);
+  }
 
   return true;
 }

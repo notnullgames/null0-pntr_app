@@ -1,351 +1,979 @@
-// Null0 web49 host-bindings generated at 2023-09-25T09:02:56.134Z
+// Null0 web49 host-bindings generated at 2023-09-25T12:37:16.936Z
 
+void null0_clear_screen(pntr_color color) {
+  pntr_clear_background(null0->screen, color);
+}
+
+u32 null0_add_image(pntr_image* image) {
+  cvector_push_back(null0->images, image);
+  return cvector_size(null0->images) - 1;
+}
+
+u32 null0_add_font(pntr_font* font) {
+  cvector_push_back(null0->fonts, font);
+  return cvector_size(null0->fonts) - 1;
+}
+
+u32 null0_add_sound(pntr_sound* sound) {
+  cvector_push_back(null0->sounds, sound);
+  return cvector_size(null0->sounds) - 1;
+}
+
+pntr_vector* null0_mouse_position(){
+  // TODO
+}
 
 static web49_interp_data_t wasmimport_new_image(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  i32 width = interp.locals[0].i32_s;
+  i32 height = interp.locals[1].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_gen_image_color(width, height, color))};
 }
 
 static web49_interp_data_t wasmimport_image_copy(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_image_copy(image))};
 }
 
 static web49_interp_data_t wasmimport_image_subimage(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  i32 x = interp.locals[1].i32_s;
+  i32 y = interp.locals[2].i32_s;
+  i32 width = interp.locals[3].i32_s;
+  i32 height = interp.locals[4].i32_s;
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_image_subimage(image, x, y, width, height))};
 }
 
 static web49_interp_data_t wasmimport_unload_image(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+
+
+  pntr_unload_image(image);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_clear(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+
+
+  null0_clear_screen(color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_clear_image(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  pntr_color color = pntr_get_color(interp.locals[1].i32_u);
+
+
+  pntr_clear_background(image, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_point(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 x = interp.locals[0].i32_s;
+  i32 y = interp.locals[1].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+
+
+  pntr_draw_point(dst, x, y, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_line(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 startPosX = interp.locals[0].i32_s;
+  i32 startPosY = interp.locals[1].i32_s;
+  i32 endPosX = interp.locals[2].i32_s;
+  i32 endPosY = interp.locals[3].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+
+
+  pntr_draw_line(dst, startPosX, startPosY, endPosX, endPosY, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_rectangle_outline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 posX = interp.locals[0].i32_s;
+  i32 posY = interp.locals[1].i32_s;
+  i32 width = interp.locals[2].i32_s;
+  i32 height = interp.locals[3].i32_s;
+  i32 thickness = interp.locals[4].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[5].i32_u);
+
+
+  pntr_draw_rectangle(dst, posX, posY, width, height, thickness, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_rectangle(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 posX = interp.locals[0].i32_s;
+  i32 posY = interp.locals[1].i32_s;
+  i32 width = interp.locals[2].i32_s;
+  i32 height = interp.locals[3].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+
+
+  pntr_draw_rectangle_fill(dst, posX, posY, width, height, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_triangle_outline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 x1 = interp.locals[0].i32_s;
+  i32 y1 = interp.locals[1].i32_s;
+  i32 x2 = interp.locals[2].i32_s;
+  i32 y2 = interp.locals[3].i32_s;
+  i32 x3 = interp.locals[4].i32_s;
+  i32 y3 = interp.locals[5].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+
+
+  pntr_draw_triangle(dst, x1, y1, x2, y2, x3, y3, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_triangle(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 x1 = interp.locals[0].i32_s;
+  i32 y1 = interp.locals[1].i32_s;
+  i32 x2 = interp.locals[2].i32_s;
+  i32 y2 = interp.locals[3].i32_s;
+  i32 x3 = interp.locals[4].i32_s;
+  i32 y3 = interp.locals[5].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+
+
+  pntr_draw_triangle_fill(dst, x1, y1, x2, y2, x3, y3, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_ellipse_outline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 centerX = interp.locals[0].i32_s;
+  i32 centerY = interp.locals[1].i32_s;
+  i32 radiusX = interp.locals[2].i32_s;
+  i32 radiusY = interp.locals[3].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+
+
+  pntr_draw_ellipse(dst, centerX, centerY, radiusX, radiusY, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_ellipse(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 centerX = interp.locals[0].i32_s;
+  i32 centerY = interp.locals[1].i32_s;
+  i32 radiusX = interp.locals[2].i32_s;
+  i32 radiusY = interp.locals[3].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+
+
+  pntr_draw_ellipse_fill(dst, centerX, centerY, radiusX, radiusY, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_circle_outline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 centerX = interp.locals[0].i32_s;
+  i32 centerY = interp.locals[1].i32_s;
+  i32 radius = interp.locals[2].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[3].i32_u);
+
+
+  pntr_draw_circle(dst, centerX, centerY, radius, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_circle(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 centerX = interp.locals[0].i32_s;
+  i32 centerY = interp.locals[1].i32_s;
+  i32 radius = interp.locals[2].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[3].i32_u);
+
+
+  pntr_draw_circle_fill(dst, centerX, centerY, radius, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_polygon_outline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_vector* points = (pntr_vector*) interp.memory[interp.locals[0].i32_u];
+  i32 numPoints = interp.locals[1].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+
+
+  pntr_draw_polygon(dst, points, numPoints, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_polygon(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_vector* points = (pntr_vector*) interp.memory[interp.locals[0].i32_u];
+  i32 numPoints = interp.locals[1].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+
+
+  pntr_draw_polygon_fill(dst, points, numPoints, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_polyline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_vector* points = (pntr_vector*) interp.memory[interp.locals[0].i32_u];
+  i32 numPoints = interp.locals[1].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+
+
+  pntr_draw_polyline(dst, points, numPoints, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_arc_outline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 centerX = interp.locals[0].i32_s;
+  i32 centerY = interp.locals[1].i32_s;
+  f32 radius = interp.locals[2].f32;
+  f32 startAngle = interp.locals[3].f32;
+  f32 endAngle = interp.locals[4].f32;
+  i32 segments = interp.locals[5].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+
+
+  pntr_draw_arc(dst, centerX, centerY, radius, startAngle, endAngle, segments, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_arc(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 centerX = interp.locals[0].i32_s;
+  i32 centerY = interp.locals[1].i32_s;
+  f32 radius = interp.locals[2].f32;
+  f32 startAngle = interp.locals[3].f32;
+  f32 endAngle = interp.locals[4].f32;
+  i32 segments = interp.locals[5].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+
+
+  pntr_draw_arc_fill(dst, centerX, centerY, radius, startAngle, endAngle, segments, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_rectangle_rounded_outline(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 x = interp.locals[0].i32_s;
+  i32 y = interp.locals[1].i32_s;
+  i32 width = interp.locals[2].i32_s;
+  i32 height = interp.locals[3].i32_s;
+  i32 topLeftRadius = interp.locals[4].i32_s;
+  i32 topRightRadius = interp.locals[5].i32_s;
+  i32 bottomLeftRadius = interp.locals[6].i32_s;
+  i32 bottomRightRadius = interp.locals[7].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[8].i32_u);
+
+
+  pntr_draw_rectangle_rounded(dst, x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_rectangle_rounded(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  i32 x = interp.locals[0].i32_s;
+  i32 y = interp.locals[1].i32_s;
+  i32 width = interp.locals[2].i32_s;
+  i32 height = interp.locals[3].i32_s;
+  i32 cornerRadius = interp.locals[4].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[5].i32_u);
+
+
+  pntr_draw_rectangle_rounded_fill(dst, x, y, width, height, cornerRadius, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_image(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_image* src = null0->images[ interp.locals[0].i32_u ];
+  i32 posX = interp.locals[1].i32_s;
+  i32 posY = interp.locals[2].i32_s;
+
+
+  pntr_draw_image(dst, src, posX, posY);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_image_tint(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_image* src = null0->images[ interp.locals[0].i32_u ];
+  i32 posX = interp.locals[1].i32_s;
+  i32 posY = interp.locals[2].i32_s;
+  pntr_color tint = pntr_get_color(interp.locals[3].i32_u);
+
+
+  pntr_draw_image_tint(dst, src, posX, posY, tint);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_image_rotated(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_image* src = null0->images[ interp.locals[0].i32_u ];
+  i32 posX = interp.locals[1].i32_s;
+  i32 posY = interp.locals[2].i32_s;
+  f32 degrees = interp.locals[3].f32;
+  f32 offsetX = interp.locals[4].f32;
+  f32 offsetY = interp.locals[5].f32;
+  pntr_filter filter = interp.locals[6].i32_u;
+
+
+  pntr_draw_image_rotated(dst, src, posX, posY, degrees, offsetX, offsetY, filter);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_image_flipped(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_image* src = null0->images[ interp.locals[0].i32_u ];
+  i32 posX = interp.locals[1].i32_s;
+  i32 posY = interp.locals[2].i32_s;
+  bool flipHorizontal = interp.locals[3].i32_u;
+  bool flipVertical = interp.locals[4].i32_u;
+
+
+  pntr_draw_image_flipped(dst, src, posX, posY, flipHorizontal, flipVertical);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_image_scaled(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_image* src = null0->images[ interp.locals[0].i32_u ];
+  i32 posX = interp.locals[1].i32_s;
+  i32 posY = interp.locals[2].i32_s;
+  f32 scaleX = interp.locals[3].f32;
+  f32 scaleY = interp.locals[4].f32;
+  f32 offsetX = interp.locals[5].f32;
+  f32 offsetY = interp.locals[6].f32;
+  pntr_filter filter = interp.locals[7].i32_u;
+
+
+  pntr_draw_image_scaled(dst, src, posX, posY, scaleX, scaleY, offsetX, offsetY, filter);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_draw_text(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* dst = null0->screen;
+  pntr_font* font = null0->fonts[ interp.locals[0].i32_u ];
+  const char* text = (const char*) interp.memory[interp.locals[1].i32_u];
+  i32 posX = interp.locals[2].i32_s;
+  i32 posY = interp.locals[3].i32_s;
+  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+
+
+  pntr_draw_text(dst, font, text, posX, posY, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_save_file(void* wasi_untyped, web49_interp_t interp) {
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+  const void* data = (const void*) interp.memory[interp.locals[1].i32_u];
+  unsigned int bytesToWrite = interp.locals[2].i32_u;
+
+
+  pntr_save_file(fileName, data, bytesToWrite);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_save_image(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  const char* fileName = (const char*) interp.memory[interp.locals[1].i32_u];
+
+
+  pntr_save_image(image, fileName);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_load_image(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_load_image(fileName))};
 }
 
 static web49_interp_data_t wasmimport_image_resize(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  i32 newWidth = interp.locals[1].i32_s;
+  i32 newHeight = interp.locals[2].i32_s;
+  i32 offsetX = interp.locals[3].i32_s;
+  i32 offsetY = interp.locals[4].i32_s;
+  pntr_color fill = pntr_get_color(interp.locals[5].i32_u);
+
+
+  pntr_image_resize_canvas(image, newWidth, newHeight, offsetX, offsetY, fill);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_scale(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  f32 scaleX = interp.locals[1].f32;
+  f32 scaleY = interp.locals[2].f32;
+  pntr_filter filter = interp.locals[3].i32_u;
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_image_scale(image, scaleX, scaleY, filter))};
 }
 
 static web49_interp_data_t wasmimport_image_color_replace(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  pntr_color color = pntr_get_color(interp.locals[1].i32_u);
+  pntr_color replace = pntr_get_color(interp.locals[2].i32_u);
+
+
+  pntr_image_color_replace(image, color, replace);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_color_tint(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color tint = pntr_get_color(interp.locals[1].i32_u);
+
+
+  pntr_color_tint(color, tint);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_color_tint(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  pntr_color color = pntr_get_color(interp.locals[1].i32_u);
+
+
+  pntr_image_color_tint(image, color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_color_fade(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  f32 alpha = interp.locals[1].f32;
+
+
+  pntr_color_fade(color, alpha);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_color_fade(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  f32 alpha = interp.locals[1].f32;
+
+
+  pntr_image_color_fade(image, alpha);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_color_brightness(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  f32 factor = interp.locals[1].f32;
+
+
+  pntr_color_brightness(color, factor);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_unload_font(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_font* font = null0->fonts[ interp.locals[0].i32_u ];
+
+
+  pntr_unload_font(font);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_font_copy(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_font* font = null0->fonts[ interp.locals[0].i32_u ];
+
+  return (web49_interp_data_t){.i32_u = null0_add_font(pntr_font_copy(font))};
 }
 
 static web49_interp_data_t wasmimport_font_scale(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_font* font = null0->fonts[ interp.locals[0].i32_u ];
+  f32 scaleX = interp.locals[1].f32;
+  f32 scaleY = interp.locals[2].f32;
+  pntr_filter filter = interp.locals[3].i32_u;
+
+  return (web49_interp_data_t){.i32_u = null0_add_font(pntr_font_scale(font, scaleX, scaleY, filter))};
 }
 
 static web49_interp_data_t wasmimport_load_font_bmf(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+  const char* characters = (const char*) interp.memory[interp.locals[1].i32_u];
+
+  return (web49_interp_data_t){.i32_u = null0_add_font(pntr_load_font_bmf(fileName, characters))};
 }
 
 static web49_interp_data_t wasmimport_load_font_bmf_from_image(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  const char* characters = (const char*) interp.memory[interp.locals[1].i32_u];
+
+  return (web49_interp_data_t){.i32_u = null0_add_font(pntr_load_font_bmf_from_image(image, characters))};
 }
 
 static web49_interp_data_t wasmimport_measure_text(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_font* font = null0->fonts[ interp.locals[0].i32_u ];
+  const char* text = (const char*) interp.memory[interp.locals[1].i32_u];
+
+
+  pntr_measure_text(font, text);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_gen_image_text(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_font* font = null0->fonts[ interp.locals[0].i32_u ];
+  const char* text = (const char*) interp.memory[interp.locals[1].i32_u];
+  pntr_color tint = pntr_get_color(interp.locals[2].i32_u);
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_gen_image_text(font, text, tint))};
 }
 
 static web49_interp_data_t wasmimport_load_font_tty(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+  i32 glyphWidth = interp.locals[1].i32_s;
+  i32 glyphHeight = interp.locals[2].i32_s;
+  const char* characters = (const char*) interp.memory[interp.locals[3].i32_u];
+
+  return (web49_interp_data_t){.i32_u = null0_add_font(pntr_load_font_tty(fileName, glyphWidth, glyphHeight, characters))};
 }
 
 static web49_interp_data_t wasmimport_load_font_tty_from_image(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  i32 glyphWidth = interp.locals[1].i32_s;
+  i32 glyphHeight = interp.locals[2].i32_s;
+  const char* characters = (const char*) interp.memory[interp.locals[3].i32_u];
+
+  return (web49_interp_data_t){.i32_u = null0_add_font(pntr_load_font_tty_from_image(image, glyphWidth, glyphHeight, characters))};
 }
 
 static web49_interp_data_t wasmimport_load_file(void* wasi_untyped, web49_interp_t interp) {
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+  unsigned int* bytesRead = (unsigned int*) interp.memory[interp.locals[1].i32_u];
+
+
+  pntr_load_file(fileName, bytesRead);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_unload_file(void* wasi_untyped, web49_interp_t interp) {
+  
+  unsigned char* fileData = (unsigned char*) interp.memory[interp.locals[0].i32_u];
+
+
+  pntr_unload_file(fileData);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_load_file_text(void* wasi_untyped, web49_interp_t interp) {
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+
+
+  pntr_load_file_text(fileName);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_unload_file_text(void* wasi_untyped, web49_interp_t interp) {
+  
+  const char* text = (const char*) interp.memory[interp.locals[0].i32_u];
+
+
+  pntr_unload_file_text(text);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_load_font_ttf(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+  i32 fontSize = interp.locals[1].i32_s;
+
+  return (web49_interp_data_t){.i32_u = null0_add_font(pntr_load_font_ttf(fileName, fontSize))};
 }
 
 static web49_interp_data_t wasmimport_color_invert(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+
+
+  pntr_color_invert(color);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_color_invert(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+
+
+  pntr_image_color_invert(image);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_color_alpha_blend(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color dst = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color src = pntr_get_color(interp.locals[1].i32_u);
+
+
+  pntr_color_alpha_blend(dst, src);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_alpha_border(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  f32 threshold = interp.locals[1].f32;
+
+
+  pntr_image_alpha_border(image, threshold);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_crop(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  i32 x = interp.locals[1].i32_s;
+  i32 y = interp.locals[2].i32_s;
+  i32 width = interp.locals[3].i32_s;
+  i32 height = interp.locals[4].i32_s;
+
+
+  pntr_image_crop(image, x, y, width, height);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_alpha_crop(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  f32 threshold = interp.locals[1].f32;
+
+
+  pntr_image_alpha_crop(image, threshold);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_color_brightness(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  f32 factor = interp.locals[1].f32;
+
+
+  pntr_image_color_brightness(image, factor);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_flip(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  bool horizontal = interp.locals[1].i32_u;
+  bool vertical = interp.locals[2].i32_u;
+
+
+  pntr_image_flip(image, horizontal, vertical);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_color_contrast(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  f32 contrast = interp.locals[1].f32;
+
+
+  pntr_color_contrast(color, contrast);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_color_contrast(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  f32 contrast = interp.locals[1].f32;
+
+
+  pntr_image_color_contrast(image, contrast);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_alpha_mask(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  pntr_image* alphaMask = null0->images[ interp.locals[1].i32_u ];
+  i32 posX = interp.locals[2].i32_s;
+  i32 posY = interp.locals[3].i32_s;
+
+
+  pntr_image_alpha_mask(image, alphaMask, posX, posY);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_image_rotate(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  pntr_image* image = null0->images[ interp.locals[0].i32_u ];
+  f32 degrees = interp.locals[1].f32;
+  pntr_filter filter = interp.locals[2].i32_u;
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_image_rotate(image, degrees, filter))};
 }
 
 static web49_interp_data_t wasmimport_image_gradient(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  i32 width = interp.locals[0].i32_s;
+  i32 height = interp.locals[1].i32_s;
+  pntr_color topLeft = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color topRight = pntr_get_color(interp.locals[3].i32_u);
+  pntr_color bottomLeft = pntr_get_color(interp.locals[4].i32_u);
+  pntr_color bottomRight = pntr_get_color(interp.locals[5].i32_u);
+
+  return (web49_interp_data_t){.i32_u = null0_add_image(pntr_gen_image_gradient(width, height, topLeft, topRight, bottomLeft, bottomRight))};
 }
 
 static web49_interp_data_t wasmimport_color_bilinear_interpolate(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_color color00 = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color color01 = pntr_get_color(interp.locals[1].i32_u);
+  pntr_color color10 = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color color11 = pntr_get_color(interp.locals[3].i32_u);
+  f32 coordinateX = interp.locals[4].f32;
+  f32 coordinateY = interp.locals[5].f32;
+
+
+  pntr_color_bilinear_interpolate(color00, color01, color10, color11, coordinateX, coordinateY);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_load_sound(void* wasi_untyped, web49_interp_t interp) {
-  return (web49_interp_data_t){.i32_u = 0};
+  
+  const char* fileName = (const char*) interp.memory[interp.locals[0].i32_u];
+
+  return (web49_interp_data_t){.i32_u = null0_add_sound(pntr_load_sound(fileName))};
 }
 
 static web49_interp_data_t wasmimport_unload_sound(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_sound* sound = null0->sounds[ interp.locals[0].i32_u ];
+
+
+  pntr_unload_sound(sound);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_play_sound(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_sound* sound = null0->sounds[ interp.locals[0].i32_u ];
+  bool loop = interp.locals[1].i32_u;
+
+
+  pntr_play_sound(sound, loop);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_stop_sound(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_sound* sound = null0->sounds[ interp.locals[0].i32_u ];
+
+
+  pntr_stop_sound(sound);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_delta_time(void* wasi_untyped, web49_interp_t interp) {
+    pntr_app* app = null0->app;
+
+
+  pntr_app_delta_time(app);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_key_pressed(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_key key = interp.locals[0].i32_u;
+
+
+  pntr_app_key_pressed(app, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_key_down(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_key key = interp.locals[0].i32_u;
+
+
+  pntr_app_key_down(app, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_key_released(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_key key = interp.locals[0].i32_u;
+
+
+  pntr_app_key_released(app, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_key_up(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_key key = interp.locals[0].i32_u;
+
+
+  pntr_app_key_up(app, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_pressed(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  i32 gamepad = interp.locals[0].i32_s;
+  pntr_app_gamepad_button key = interp.locals[1].i32_u;
+
+
+  pntr_app_gamepad_button_pressed(app, gamepad, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_down(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  i32 gamepad = interp.locals[0].i32_s;
+  pntr_app_gamepad_button key = interp.locals[1].i32_u;
+
+
+  pntr_app_gamepad_button_down(app, gamepad, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_released(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  i32 gamepad = interp.locals[0].i32_s;
+  pntr_app_gamepad_button key = interp.locals[1].i32_u;
+
+
+  pntr_app_gamepad_button_released(app, gamepad, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_up(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  i32 gamepad = interp.locals[0].i32_s;
+  pntr_app_gamepad_button key = interp.locals[1].i32_u;
+
+
+  pntr_app_gamepad_button_up(app, gamepad, key);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_mouse_position(void* wasi_untyped, web49_interp_t interp) {
+  
+  null0_mouse_position();
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_mouse_button_pressed(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_mouse_button button = interp.locals[0].i32_u;
+
+
+  pntr_app_mouse_button_pressed(app, button);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_mouse_button_down(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_mouse_button button = interp.locals[0].i32_u;
+
+
+  pntr_app_mouse_button_down(app, button);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_mouse_button_released(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_mouse_button button = interp.locals[0].i32_u;
+
+
+  pntr_app_mouse_button_released(app, button);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_mouse_button_up(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  pntr_app_mouse_button button = interp.locals[0].i32_u;
+
+
+  pntr_app_mouse_button_up(app, button);
   return (web49_interp_data_t){.i32_u = 0};
 }
 
 static web49_interp_data_t wasmimport_set_title(void* wasi_untyped, web49_interp_t interp) {
+  
+  pntr_app* app = null0->app;
+  const char* title = (const char*) interp.memory[interp.locals[0].i32_u];
+
+
+  pntr_app_set_title(app, title);
   return (web49_interp_data_t){.i32_u = 0};
 }
 

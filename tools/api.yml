@@ -1100,7 +1100,7 @@ gamepad_button_up:
   returns: bool
 
 mouse_position:
-  null0_name: null0_mouse_position
+  host_name: null0_mouse_position
   args: {}
   returns: pntr_vector*
 
