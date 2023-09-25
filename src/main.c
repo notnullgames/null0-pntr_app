@@ -40,6 +40,8 @@ AppData* null0;
 
 // web49 interptretor
 web49_interp_t interp;
+extern const char** environ;
+const char** args;
 
 // the filename of your cart
 char* cartName = NULL;
@@ -153,7 +155,9 @@ bool Init(pntr_app* app) {
 
   interp = web49_interp_module(mod);
 
-  web49_interp_add_import_func(&interp, NULL, &web49_main_import_func);
+  web49_wasi_t* wasi = web49_wasi_new(args, environ);
+
+  web49_interp_add_import_func(&interp, wasi, &web49_main_import_func);
 
   if (null0->cart_load) {
     web49_interp_block_run(&interp, &interp.funcs[null0->cart_load]);
@@ -190,6 +194,7 @@ pntr_app Main(int argc, char* argv[]) {
 #endif
 
   cartName = argv[1];
+  args = argv + 1;
 
   return (pntr_app){
       .width = 320,
