@@ -30,6 +30,9 @@ ${DIR_WEB}/sound.null0: ${DIR_OUT}/sound.wasm
 	@cd ${BUILD_DIR} && cp $? main.wasm && zip -r $@ main.wasm && rm main.wasm
 	@cd ${DIR_CART}/sound && zip -r $@ . -x "*.c" -x "*.h" -x "*/.DS_Store"
 
+${DIR_WEB}/tester.null0: ${DIR_OUT}/sound.wasm
+	@cd ${BUILD_DIR} && cp $? main.wasm && zip -r $@ main.wasm && rm main.wasm
+	@cd ${DIR_CART}/sound && zip -r $@ . -x "*.c" -x "*.h" -x "*/.DS_Store"
 
 .PHONY: web
 web: ## Run development web-server
@@ -55,7 +58,10 @@ runtime_cli: ## build CLI host
 	cmake -B build -DSDL=false -DRAYLIB=false -DLIBRETRO=false -DCLI=true && cmake --build build
 
 .PHONY: carts
-carts: cart_justlog cart_files cart_sound cart_hello ## Build all carts
+carts: cart_tester cart_justlog cart_files cart_sound cart_hello ## Build all carts
+
+.PHONY: cart_tester
+cart_tester: ${DIR_WEB}/tester.null0	## Build a cart that calls all API functions
 
 .PHONY: cart_justlog
 cart_justlog: ${DIR_WEB}/justlog.null0	## Build a minimal demo cart
