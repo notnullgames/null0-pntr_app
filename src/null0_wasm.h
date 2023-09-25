@@ -6,9 +6,9 @@ static web49_interp_data_t wasi_import_generic(void* wasi_untyped, web49_interp_
 }
 
 static web49_interp_data_t wasmimport_color_tint(void* wasi_untyped, web49_interp_t interp) {
-  u32 color = interp.locals[0].i32_u;
-  u32 tint = interp.locals[1].i32_u;
-  pntr_color retVal = pntr_color_tint((pntr_color)color, (pntr_color)tint);
+  pntr_color color = (pntr_color)interp.locals[0].i32_u;
+  pntr_color tint = (pntr_color)interp.locals[1].i32_u;
+  pntr_color retVal = pntr_color_tint(color, tint);
   return (web49_interp_data_t){.i32_u = retVal.data};
 }
 
