@@ -154,9 +154,7 @@ bool Init(pntr_app* app) {
   web49_opt_tree_module(&mod);
 
   interp = web49_interp_module(mod);
-
   web49_wasi_t* wasi = web49_wasi_new(args, environ);
-
   web49_interp_add_import_func(&interp, wasi, &web49_main_import_func);
 
   if (null0->cart_load) {

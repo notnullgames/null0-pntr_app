@@ -9,9 +9,12 @@ int main() {
 
   printf("iBlank: %d\niCopy: %d\n", iBlank, iCopy);
 
-  clear(RED);
-
   return 0;
+}
+
+NULL0_EXPORT("update")
+void update() {
+  clear(RED);
 }
 
 NULL0_EXPORT("buttonUp")
