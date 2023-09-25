@@ -12,7 +12,7 @@ option(LIBRETRO "Build libretro" TRUE)
 option(CLI "Build CLI" TRUE)
 option(WEB "Build Web" TRUE)
 
-list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/.cmake")
+list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/tools/build")
 
 find_package(mattiasgustavssonlib REQUIRED)
 

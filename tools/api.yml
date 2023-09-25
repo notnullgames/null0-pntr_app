@@ -1,0 +1,1155 @@
+new_image:
+  host_name: pntr_gen_image_color
+  host_args:
+    width: int
+    height: int
+    color: pntr_color
+  host_returns: pntr_image*
+  args:
+    width: i32
+    height: i32
+    color: pntr_color
+  returns: pntr_image*
+
+image_copy:
+  host_name: pntr_image_copy
+  host_args:
+    image: pntr_image*
+  host_returns: pntr_image*
+  args:
+    image: pntr_image*
+  returns: pntr_image*
+
+image_subimage:
+  host_name: pntr_image_subimage
+  host_args:
+    image: pntr_image*
+    x: int
+    y: int
+    width: int
+    height: int
+  host_returns: pntr_image*
+  args:
+    image: pntr_image*
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+  returns: pntr_image*
+
+unload_image:
+  host_name: pntr_unload_image
+  host_args:
+    image: pntr_image*
+  host_returns: void
+  args:
+    image: pntr_image*
+  returns: void
+
+clear:
+  host_name: null0_clear_screen
+  host_args:
+    color: pntr_color
+  host_returns: void
+  args:
+    color: pntr_color
+  returns: void
+
+clear_image:
+  host_name: pntr_clear_background
+  host_args:
+    image: pntr_image*
+    color: pntr_color
+  host_returns: void
+  args:
+    image: pntr_image*
+    color: pntr_color
+  returns: void
+
+draw_point:
+  host_name: pntr_draw_point
+  host_args:
+    dst: pntr_image*
+    x: int
+    y: int
+    color: pntr_color
+  host_returns: void
+  args:
+    x: i32
+    y: i32
+    color: pntr_color
+  returns: void
+
+draw_line:
+  host_name: pntr_draw_line
+  host_args:
+    dst: pntr_image*
+    startPosX: int
+    startPosY: int
+    endPosX: int
+    endPosY: int
+    color: pntr_color
+  host_returns: void
+  args:
+    startPosX: i32
+    startPosY: i32
+    endPosX: i32
+    endPosY: i32
+    color: pntr_color
+  returns: void
+
+draw_rectangle_outline:
+  host_name: pntr_draw_rectangle
+  host_args:
+    dst: pntr_image*
+    posX: int
+    posY: int
+    width: int
+    height: int
+    thickness: int
+    color: pntr_color
+  host_returns: void
+  args:
+    posX: i32
+    posY: i32
+    width: i32
+    height: i32
+    thickness: i32
+    color: pntr_color
+  returns: void
+
+draw_rectangle:
+  host_name: pntr_draw_rectangle_fill
+  host_args:
+    dst: pntr_image*
+    posX: int
+    posY: int
+    width: int
+    height: int
+    color: pntr_color
+  host_returns: void
+  args:
+    posX: i32
+    posY: i32
+    width: i32
+    height: i32
+    color: pntr_color
+  returns: void
+
+draw_triangle_outline:
+  host_name: pntr_draw_triangle
+  host_args:
+    dst: pntr_image*
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+    x3: int
+    y3: int
+    color: pntr_color
+  host_returns: void
+  args:
+    x1: i32
+    y1: i32
+    x2: i32
+    y2: i32
+    x3: i32
+    y3: i32
+    color: pntr_color
+  returns: void
+
+draw_triangle:
+  host_name: pntr_draw_triangle_fill
+  host_args:
+    dst: pntr_image*
+    x1: int
+    y1: int
+    x2: int
+    y2: int
+    x3: int
+    y3: int
+    color: pntr_color
+  host_returns: void
+  args:
+    x1: i32
+    y1: i32
+    x2: i32
+    y2: i32
+    x3: i32
+    y3: i32
+    color: pntr_color
+  returns: void
+
+draw_ellipse_outline:
+  host_name: pntr_draw_ellipse
+  host_args:
+    dst: pntr_image*
+    centerX: int
+    centerY: int
+    radiusX: int
+    radiusY: int
+    color: pntr_color
+  host_returns: void
+  args:
+    centerX: i32
+    centerY: i32
+    radiusX: i32
+    radiusY: i32
+    color: pntr_color
+  returns: void
+
+draw_ellipse:
+  host_name: pntr_draw_ellipse_fill
+  host_args:
+    dst: pntr_image*
+    centerX: int
+    centerY: int
+    radiusX: int
+    radiusY: int
+    color: pntr_color
+  host_returns: void
+  args:
+    centerX: i32
+    centerY: i32
+    radiusX: i32
+    radiusY: i32
+    color: pntr_color
+  returns: void
+
+draw_circle_outline:
+  host_name: pntr_draw_circle
+  host_args:
+    dst: pntr_image*
+    centerX: int
+    centerY: int
+    radius: int
+    color: pntr_color
+  host_returns: void
+  args:
+    centerX: i32
+    centerY: i32
+    radius: i32
+    color: pntr_color
+  returns: void
+
+draw_circle:
+  host_name: pntr_draw_circle_fill
+  host_args:
+    dst: pntr_image*
+    centerX: int
+    centerY: int
+    radius: int
+    color: pntr_color
+  host_returns: void
+  args:
+    centerX: i32
+    centerY: i32
+    radius: i32
+    color: pntr_color
+  returns: void
+
+draw_polygon_outline:
+  host_name: pntr_draw_polygon
+  host_args:
+    dst: pntr_image*
+    points: pntr_vector*
+    numPoints: int
+    color: pntr_color
+  host_returns: void
+  args:
+    points: pntr_vector*
+    numPoints: i32
+    color: pntr_color
+  returns: void
+
+draw_polygon:
+  host_name: pntr_draw_polygon_fill
+  host_args:
+    dst: pntr_image*
+    points: pntr_vector*
+    numPoints: int
+    color: pntr_color
+  host_returns: void
+  args:
+    points: pntr_vector*
+    numPoints: i32
+    color: pntr_color
+  returns: void
+
+draw_polyline:
+  host_name: pntr_draw_polyline
+  host_args:
+    dst: pntr_image*
+    points: pntr_vector*
+    numPoints: int
+    color: pntr_color
+  host_returns: void
+  args:
+    points: pntr_vector*
+    numPoints: i32
+    color: pntr_color
+  returns: void
+
+draw_arc_outline:
+  host_name: pntr_draw_arc
+  host_args:
+    dst: pntr_image*
+    centerX: int
+    centerY: int
+    radius: float
+    startAngle: float
+    endAngle: float
+    segments: int
+    color: pntr_color
+  host_returns: void
+  args:
+    centerX: i32
+    centerY: i32
+    radius: f32
+    startAngle: f32
+    endAngle: f32
+    segments: i32
+    color: pntr_color
+  returns: void
+
+draw_arc:
+  host_name: pntr_draw_arc_fill
+  host_args:
+    dst: pntr_image*
+    centerX: int
+    centerY: int
+    radius: float
+    startAngle: float
+    endAngle: float
+    segments: int
+    color: pntr_color
+  host_returns: void
+  args:
+    centerX: i32
+    centerY: i32
+    radius: f32
+    startAngle: f32
+    endAngle: f32
+    segments: i32
+    color: pntr_color
+  returns: void
+
+draw_rectangle_rounded_outline:
+  host_name: pntr_draw_rectangle_rounded
+  host_args:
+    dst: pntr_image*
+    x: int
+    y: int
+    width: int
+    height: int
+    topLeftRadius: int
+    topRightRadius: int
+    bottomLeftRadius: int
+    bottomRightRadius: int
+    color: pntr_color
+  host_returns: void
+  args:
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+    topLeftRadius: i32
+    topRightRadius: i32
+    bottomLeftRadius: i32
+    bottomRightRadius: i32
+    color: pntr_color
+  returns: void
+
+draw_rectangle_rounded:
+  host_name: pntr_draw_rectangle_rounded_fill
+  host_args:
+    dst: pntr_image*
+    x: int
+    y: int
+    width: int
+    height: int
+    cornerRadius: int
+    color: pntr_color
+  host_returns: void
+  args:
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+    cornerRadius: i32
+    color: pntr_color
+  returns: void
+
+draw_image:
+  host_name: pntr_draw_image
+  host_args:
+    dst: pntr_image*
+    src: pntr_image*
+    posX: int
+    posY: int
+  host_returns: void
+  args:
+    src: pntr_image*
+    posX: i32
+    posY: i32
+  returns: void
+
+draw_image_tint:
+  host_name: pntr_draw_image_tint
+  host_args:
+    dst: pntr_image*
+    src: pntr_image*
+    posX: int
+    posY: int
+    tint: pntr_color
+  host_returns: void
+  args:
+    src: pntr_image*
+    posX: i32
+    posY: i32
+    tint: pntr_color
+  returns: void
+
+draw_image_rotated:
+  host_name: pntr_draw_image_rotated
+  host_args:
+    dst: pntr_image*
+    src: pntr_image*
+    posX: int
+    posY: int
+    degrees: float
+    offsetX: float
+    offsetY: float
+    filter: pntr_filter
+  host_returns: void
+  args:
+    src: pntr_image*
+    posX: i32
+    posY: i32
+    degrees: f32
+    offsetX: f32
+    offsetY: f32
+    filter: pntr_filter
+  returns: void
+
+draw_image_flipped:
+  host_name: pntr_draw_image_flipped
+  host_args:
+    dst: pntr_image*
+    src: pntr_image*
+    posX: int
+    posY: int
+    flipHorizontal: bool
+    flipVertical: bool
+  host_returns: void
+  args:
+    src: pntr_image*
+    posX: i32
+    posY: i32
+    flipHorizontal: bool
+    flipVertical: bool
+  returns: void
+
+draw_image_scaled:
+  host_name: pntr_draw_image_scaled
+  host_args:
+    dst: pntr_image*
+    src: pntr_image*
+    posX: int
+    posY: int
+    scaleX: float
+    scaleY: float
+    offsetX: float
+    offsetY: float
+    filter: pntr_filter
+  host_returns: void
+  args:
+    src: pntr_image*
+    posX: i32
+    posY: i32
+    scaleX: f32
+    scaleY: f32
+    offsetX: f32
+    offsetY: f32
+    filter: pntr_filter
+  returns: void
+
+draw_text:
+  host_name: pntr_draw_text
+  host_args:
+    dst: pntr_image*
+    font: pntr_font*
+    text: const char*
+    posX: int
+    posY: int
+    color: pntr_color
+  host_returns: void
+  args:
+    font: pntr_font*
+    text: const char*
+    posX: i32
+    posY: i32
+    color: pntr_color
+  returns: void
+
+save_file:
+  host_name: pntr_save_file
+  host_args:
+    fileName: const char*
+    data: const void*
+    bytesToWrite: unsigned int
+  host_returns: bool
+  args:
+    fileName: const char*
+    data: const void*
+    bytesToWrite: unsigned int
+  returns: bool
+
+save_image:
+  host_name: pntr_save_image
+  host_args:
+    image: pntr_image*
+    fileName: const char*
+  host_returns: bool
+  args:
+    image: pntr_image*
+    fileName: const char*
+  returns: bool
+
+load_image:
+  host_name: pntr_load_image
+  host_args:
+    fileName: const char*
+  host_returns: pntr_image*
+  args:
+    fileName: const char*
+  returns: pntr_image*
+
+image_resize:
+  host_name: pntr_image_resize_canvas
+  host_args:
+    image: pntr_image*
+    newWidth: int
+    newHeight: int
+    offsetX: int
+    offsetY: int
+    fill: pntr_color
+  host_returns: bool
+  args:
+    image: pntr_image*
+    newWidth: i32
+    newHeight: i32
+    offsetX: i32
+    offsetY: i32
+    fill: pntr_color
+  returns: bool
+
+image_scale:
+  host_name: pntr_image_scale
+  host_args:
+    image: pntr_image*
+    scaleX: float
+    scaleY: float
+    filter: pntr_filter
+  host_returns: pntr_image*
+  args:
+    image: pntr_image*
+    scaleX: f32
+    scaleY: f32
+    filter: pntr_filter
+  returns: pntr_image*
+
+image_color_replace:
+  host_name: pntr_image_color_replace
+  host_args:
+    image: pntr_image*
+    color: pntr_color
+    replace: pntr_color
+  host_returns: void
+  args:
+    image: pntr_image*
+    color: pntr_color
+    replace: pntr_color
+  returns: void
+
+color_tint:
+  host_name: pntr_color_tint
+  host_args:
+    color: pntr_color
+    tint: pntr_color
+  host_returns: pntr_color
+  args:
+    color: pntr_color
+    tint: pntr_color
+  returns: pntr_color
+
+image_color_tint:
+  host_name: pntr_image_color_tint
+  host_args:
+    image: pntr_image*
+    color: pntr_color
+  host_returns: void
+  args:
+    image: pntr_image*
+    color: pntr_color
+  returns: void
+
+color_fade:
+  host_name: pntr_color_fade
+  host_args:
+    color: pntr_color
+    alpha: float
+  host_returns: pntr_color
+  args:
+    color: pntr_color
+    alpha: f32
+  returns: pntr_color
+
+image_color_fade:
+  host_name: pntr_image_color_fade
+  host_args:
+    image: pntr_image*
+    alpha: float
+  host_returns: void
+  args:
+    image: pntr_image*
+    alpha: f32
+  returns: void
+
+color_brightness:
+  host_name: pntr_color_brightness
+  host_args:
+    color: pntr_color
+    factor: float
+  host_returns: pntr_color
+  args:
+    color: pntr_color
+    factor: f32
+  returns: pntr_color
+
+unload_font:
+  host_name: pntr_unload_font
+  host_args:
+    font: pntr_font*
+  host_returns: void
+  args:
+    font: pntr_font*
+  returns: void
+
+font_copy:
+  host_name: pntr_font_copy
+  host_args:
+    font: pntr_font*
+  host_returns: pntr_font*
+  args:
+    font: pntr_font*
+  returns: pntr_font*
+
+font_scale:
+  host_name: pntr_font_scale
+  host_args:
+    font: pntr_font*
+    scaleX: float
+    scaleY: float
+    filter: pntr_filter
+  host_returns: pntr_font*
+  args:
+    font: pntr_font*
+    scaleX: f32
+    scaleY: f32
+    filter: pntr_filter
+  returns: pntr_font*
+
+load_font_bmf:
+  host_name: pntr_load_font_bmf
+  host_args:
+    fileName: const char*
+    characters: const char*
+  host_returns: pntr_font*
+  args:
+    fileName: const char*
+    characters: const char*
+  returns: pntr_font*
+
+load_font_bmf_from_image:
+  host_name: pntr_load_font_bmf_from_image
+  host_args:
+    image: pntr_image*
+    characters: const char*
+  host_returns: pntr_font*
+  args:
+    image: pntr_image*
+    characters: const char*
+  returns: pntr_font*
+
+measure_text:
+  host_name: pntr_measure_text
+  host_args:
+    font: pntr_font*
+    text: const char*
+  host_returns: int
+  args:
+    font: pntr_font*
+    text: const char*
+  returns: i32
+
+gen_image_text:
+  host_name: pntr_gen_image_text
+  host_args:
+    font: pntr_font*
+    text: const char*
+    tint: pntr_color
+  host_returns: pntr_image*
+  args:
+    font: pntr_font*
+    text: const char*
+    tint: pntr_color
+  returns: pntr_image*
+
+load_font_tty:
+  host_name: pntr_load_font_tty
+  host_args:
+    fileName: const char*
+    glyphWidth: int
+    glyphHeight: int
+    characters: const char*
+  host_returns: pntr_font*
+  args:
+    fileName: const char*
+    glyphWidth: i32
+    glyphHeight: i32
+    characters: const char*
+  returns: pntr_font*
+
+load_font_tty_from_image:
+  host_name: pntr_load_font_tty_from_image
+  host_args:
+    image: pntr_image*
+    glyphWidth: int
+    glyphHeight: int
+    characters: const char*
+  host_returns: pntr_font*
+  args:
+    image: pntr_image*
+    glyphWidth: i32
+    glyphHeight: i32
+    characters: const char*
+  returns: pntr_font*
+
+load_file:
+  host_name: pntr_load_file
+  host_args:
+    fileName: const char*
+    bytesRead: unsigned int*
+  host_returns: unsigned char*
+  args:
+    fileName: const char*
+    bytesRead: unsigned int*
+  returns: unsigned char*
+
+unload_file:
+  host_name: pntr_unload_file
+  host_args:
+    fileData: unsigned char*
+  host_returns: void
+  args:
+    fileData: unsigned char*
+  returns: void
+
+load_file_text:
+  host_name: pntr_load_file_text
+  host_args:
+    fileName: const char*
+  host_returns: const char*
+  args:
+    fileName: const char*
+  returns: const char*
+
+unload_file_text:
+  host_name: pntr_unload_file_text
+  host_args:
+    text: const char*
+  host_returns: void
+  args:
+    text: const char*
+  returns: void
+
+load_font_ttf:
+  host_name: pntr_load_font_ttf
+  host_args:
+    fileName: const char*
+    fontSize: int
+  host_returns: pntr_font*
+  args:
+    fileName: const char*
+    fontSize: i32
+  returns: pntr_font*
+
+color_invert:
+  host_name: pntr_color_invert
+  host_args:
+    color: pntr_color
+  host_returns: pntr_color
+  args:
+    color: pntr_color
+  returns: pntr_color
+
+image_color_invert:
+  host_name: pntr_image_color_invert
+  host_args:
+    image: pntr_image*
+  host_returns: void
+  args:
+    image: pntr_image*
+  returns: void
+
+color_alpha_blend:
+  host_name: pntr_color_alpha_blend
+  host_args:
+    dst: pntr_color
+    src: pntr_color
+  host_returns: pntr_color
+  args:
+    dst: pntr_color
+    src: pntr_color
+  returns: pntr_color
+
+image_alpha_border:
+  host_name: pntr_image_alpha_border
+  host_args:
+    image: pntr_image*
+    threshold: float
+  host_returns: pntr_rectangle
+  args:
+    image: pntr_image*
+    threshold: f32
+  returns: pntr_rectangle
+
+image_crop:
+  host_name: pntr_image_crop
+  host_args:
+    image: pntr_image*
+    x: int
+    y: int
+    width: int
+    height: int
+  host_returns: bool
+  args:
+    image: pntr_image*
+    x: i32
+    y: i32
+    width: i32
+    height: i32
+  returns: bool
+
+image_alpha_crop:
+  host_name: pntr_image_alpha_crop
+  host_args:
+    image: pntr_image*
+    threshold: float
+  host_returns: void
+  args:
+    image: pntr_image*
+    threshold: f32
+  returns: void
+
+image_color_brightness:
+  host_name: pntr_image_color_brightness
+  host_args:
+    image: pntr_image*
+    factor: float
+  host_returns: void
+  args:
+    image: pntr_image*
+    factor: f32
+  returns: void
+
+image_flip:
+  host_name: pntr_image_flip
+  host_args:
+    image: pntr_image*
+    horizontal: bool
+    vertical: bool
+  host_returns: void
+  args:
+    image: pntr_image*
+    horizontal: bool
+    vertical: bool
+  returns: void
+
+color_contrast:
+  host_name: pntr_color_contrast
+  host_args:
+    color: pntr_color
+    contrast: float
+  host_returns: pntr_color
+  args:
+    color: pntr_color
+    contrast: f32
+  returns: pntr_color
+
+image_color_contrast:
+  host_name: pntr_image_color_contrast
+  host_args:
+    image: pntr_image*
+    contrast: float
+  host_returns: void
+  args:
+    image: pntr_image*
+    contrast: f32
+  returns: void
+
+image_alpha_mask:
+  host_name: pntr_image_alpha_mask
+  host_args:
+    image: pntr_image*
+    alphaMask: pntr_image*
+    posX: int
+    posY: int
+  host_returns: void
+  args:
+    image: pntr_image*
+    alphaMask: pntr_image*
+    posX: i32
+    posY: i32
+  returns: void
+
+image_rotate:
+  host_name: pntr_image_rotate
+  host_args:
+    image: pntr_image*
+    degrees: float
+    filter: pntr_filter
+  host_returns: pntr_image*
+  args:
+    image: pntr_image*
+    degrees: f32
+    filter: pntr_filter
+  returns: pntr_image*
+
+image_gradient:
+  host_name: pntr_gen_image_gradient
+  host_args:
+    width: int
+    height: int
+    topLeft: pntr_color
+    topRight: pntr_color
+    bottomLeft: pntr_color
+    bottomRight: pntr_color
+  host_returns: pntr_image*
+  args:
+    width: i32
+    height: i32
+    topLeft: pntr_color
+    topRight: pntr_color
+    bottomLeft: pntr_color
+    bottomRight: pntr_color
+  returns: pntr_image*
+
+color_bilinear_interpolate:
+  host_name: pntr_color_bilinear_interpolate
+  host_args:
+    color00: pntr_color
+    color01: pntr_color
+    color10: pntr_color
+    color11: pntr_color
+    coordinateX: float
+    coordinateY: float
+  host_returns: pntr_color
+  args:
+    color00: pntr_color
+    color01: pntr_color
+    color10: pntr_color
+    color11: pntr_color
+    coordinateX: f32
+    coordinateY: f32
+  returns: pntr_color
+
+load_sound:
+  host_name: pntr_load_sound
+  host_args:
+    fileName: const char*
+  host_returns: pntr_sound*
+  args:
+    fileName: const char*
+  returns: pntr_sound*
+
+unload_sound:
+  host_name: pntr_unload_sound
+  host_args:
+    sound: pntr_sound*
+  host_returns: void
+  args:
+    sound: pntr_sound*
+  returns: void
+
+play_sound:
+  host_name: pntr_play_sound
+  host_args:
+    sound: pntr_sound*
+    loop: bool
+  host_returns: void
+  args:
+    sound: pntr_sound*
+    loop: bool
+  returns: void
+
+stop_sound:
+  host_name: pntr_stop_sound
+  host_args:
+    sound: pntr_sound*
+  host_returns: void
+  args:
+    sound: pntr_sound*
+  returns: void
+
+delta_time:
+  host_name: pntr_app_delta_time
+  host_args:
+    app: pntr_app*
+  host_returns: float
+  args: {}
+  returns: f32
+
+key_pressed:
+  host_name: pntr_app_key_pressed
+  host_args:
+    app: pntr_app*
+    key: pntr_app_key
+  host_returns: bool
+  args:
+    key: pntr_app_key
+  returns: bool
+
+key_down:
+  host_name: pntr_app_key_down
+  host_args:
+    app: pntr_app*
+    key: pntr_app_key
+  host_returns: bool
+  args:
+    key: pntr_app_key
+  returns: bool
+
+key_released:
+  host_name: pntr_app_key_released
+  host_args:
+    app: pntr_app*
+    key: pntr_app_key
+  host_returns: bool
+  args:
+    key: pntr_app_key
+  returns: bool
+
+key_up:
+  host_name: pntr_app_key_up
+  host_args:
+    app: pntr_app*
+    key: pntr_app_key
+  host_returns: bool
+  args:
+    key: pntr_app_key
+  returns: bool
+
+gamepad_button_pressed:
+  host_name: pntr_app_gamepad_button_pressed
+  host_args:
+    app: pntr_app*
+    gamepad: int
+    key: pntr_app_gamepad_button
+  host_returns: bool
+  args:
+    gamepad: i32
+    key: pntr_app_gamepad_button
+  returns: bool
+
+gamepad_button_down:
+  host_name: pntr_app_gamepad_button_down
+  host_args:
+    app: pntr_app*
+    gamepad: int
+    key: pntr_app_gamepad_button
+  host_returns: bool
+  args:
+    gamepad: i32
+    key: pntr_app_gamepad_button
+  returns: bool
+
+gamepad_button_released:
+  host_name: pntr_app_gamepad_button_released
+  host_args:
+    app: pntr_app*
+    gamepad: int
+    key: pntr_app_gamepad_button
+  host_returns: bool
+  args:
+    gamepad: i32
+    key: pntr_app_gamepad_button
+  returns: bool
+
+gamepad_button_up:
+  host_name: pntr_app_gamepad_button_up
+  host_args:
+    app: pntr_app*
+    gamepad: int
+    key: pntr_app_gamepad_button
+  host_returns: bool
+  args:
+    gamepad: i32
+    key: pntr_app_gamepad_button
+  returns: bool
+
+mouse_position:
+  null0_name: null0_mouse_position
+  args: {}
+  returns: pntr_vector*
+
+mouse_button_pressed:
+  host_name: pntr_app_mouse_button_pressed
+  host_args:
+    app: pntr_app*
+    button: pntr_app_mouse_button
+  host_returns: bool
+  args:
+    button: pntr_app_mouse_button
+  returns: bool
+
+mouse_button_down:
+  host_name: pntr_app_mouse_button_down
+  host_args:
+    app: pntr_app*
+    button: pntr_app_mouse_button
+  host_returns: bool
+  args:
+    button: pntr_app_mouse_button
+  returns: bool
+
+mouse_button_released:
+  host_name: pntr_app_mouse_button_released
+  host_args:
+    app: pntr_app*
+    button: pntr_app_mouse_button
+  host_returns: bool
+  args:
+    button: pntr_app_mouse_button
+  returns: bool
+
+mouse_button_up:
+  host_name: pntr_app_mouse_button_up
+  host_args:
+    app: pntr_app*
+    button: pntr_app_mouse_button
+  host_returns: bool
+  args:
+    button: pntr_app_mouse_button
+  returns: bool
+
+set_title:
+  host_name: pntr_app_set_title
+  host_args:
+    app: pntr_app*
+    title: const char*
+  host_returns: void
+  args:
+    title: const char*
+  returns: void

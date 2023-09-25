@@ -66,32 +66,5 @@ unsigned char* null0_load_file(const char* fname, unsigned int* bytesRead) {
     *bytesRead = outSize;
   }
 
-  printf("load file: %s - %d\n%s\n", path, outSize, out);
-
   return out;
-}
-
-char* getDirectoryPath(const char* filePath) {
-  // Find the last occurrence of the directory separator character ('/' or '\') in the file path
-  const char* lastSeparator = strrchr(filePath, '/');
-  if (lastSeparator == NULL) {
-    lastSeparator = strrchr(filePath, '\\');  // Check for Windows-style path separator
-  }
-
-  if (lastSeparator != NULL) {
-    // Calculate the length of the directory path
-    size_t pathLength = lastSeparator - filePath + 1;
-
-    // Allocate memory for the directory path
-    char* directoryPath = (char*)malloc(pathLength + 1);
-
-    // Copy the directory path into the allocated memory
-    strncpy(directoryPath, filePath, pathLength);
-    directoryPath[pathLength] = '\0';  // Null-terminate the string
-
-    return directoryPath;
-  } else {
-    // No directory separator found, return NULL or handle the error accordingly
-    return NULL;
-  }
 }
