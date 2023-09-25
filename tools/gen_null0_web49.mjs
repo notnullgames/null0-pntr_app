@@ -19,7 +19,9 @@ const web49Map = {
   void: 'void',
   pntr_filter: 'i32_u',
   pntr_app_gamepad_button: 'i32_u',
-  'pntr_image*': 'i32_u'
+  'pntr_image*': 'i32_u',
+  'unsigned int': 'i32_u',
+  pntr_color: 'i32_u',
 }
 
 function get_wasm_args(func) {
@@ -29,16 +31,16 @@ function get_wasm_args(func) {
   }
   return '\n  ' + Object.keys(params).map((p, i) => {
     if (params[p] === 'pntr_sound*') {
-      return `${params[p]} ${p} = null0->sounds[ interp.locals[${i}].i32_u ];`
+      return `u32 ${p} = interp.locals[${i}].i32_u;`
     }
     if (params[p] === 'pntr_image*') {
-      return `${params[p]} ${p} = null0->images[ interp.locals[${i}].i32_u ];`
+      return `u32 ${p} = interp.locals[${i}].i32_u;`
     }
     if (params[p] === 'pntr_font*') {
-      return `${params[p]} ${p} = null0->fonts[ interp.locals[${i}].i32_u ];`
+      return `u32 ${p} = interp.locals[${i}].i32_u;`
     }
     if (params[p] === 'pntr_color') {
-      return `${params[p]} ${p} = pntr_get_color(interp.locals[${i}].i32_u);`
+      return `u32 ${p} = pntr_get_color(interp.locals[${i}].i32_u);`
     }
     if (params[p].includes('*')) {
       return `${params[p]} ${p} = (${params[p]}) interp.memory[interp.locals[${i}].i32_u];`
@@ -55,11 +57,19 @@ function get_wasm_call(func) {
   if (args[0] === 'dst' && func.name.startsWith('draw_')) {
     args[0] = 'null0->screen'
   }
+
+  for (const a in args) {
+    const arg = args[a]
+    if (func.pntr_args[arg] === 'pntr_image*') {
+        args[a] = `null0->images[ ${args[a]} ]`
+    }
+  }
+
   if (func.returns === 'void') {
     return `${func.pntr_name}(${args.join(', ')});\nreturn (web49_interp_data_t){.i32_u = 0};`
   }
 
-  return `${func.returns} retVal = ${func.pntr_name}(${args.join(', ')});\nreturn (web49_interp_data_t){.${web49Map[func.returns]} = 0};`
+  return `${func.returns} retVal = ${func.pntr_name}(${args.join(', ')});\nreturn (web49_interp_data_t){.${web49Map[func.returns]} = (u32) retVal};`
 }
 
 

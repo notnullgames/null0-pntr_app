@@ -1,10 +1,12 @@
-// #include <dirent.h>
-// #include <libgen.h>
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <sys/stat.h>
-// #include <sys/time.h>
-// #include <unistd.h>
+// TOOD: I probly don't need all these
+
+#include <dirent.h>
+#include <libgen.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <unistd.h>
 
 typedef int8_t i8;
 typedef int16_t i16;
