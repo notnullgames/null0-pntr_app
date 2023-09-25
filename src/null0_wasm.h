@@ -1,25 +1,4 @@
-// Null0 web49 host-bindings generated at 2023-09-24T20:42:16.311Z
-
-// web49
-#include "api/api.h"
-#include "ast.h"
-#include "interp/interp.h"
-#include "opt/tee.h"
-#include "opt/tree.h"
-#include "read_bin.h"
-
-assetsys_t* assetsys;
-
-#define CVECTOR_LOGARITHMIC_GROWTH
-#include "cvector.h"
-
-pntr_image* null0_screen;
-cvector_vector_type(pntr_image*) null0_images = NULL;
-
-pntr_font* null0_current_font;
-cvector_vector_type(pntr_font*) null0_fonts = NULL;
-
-cvector_vector_type(void*) null0_sounds = NULL;
+// Null0 web49 host-bindings generated at 2023-09-25T00:53:50.445Z
 
 static web49_interp_data_t wasi_import_generic(void* wasi_untyped, web49_interp_t interp) {
   printf("Unkown import called\n");
@@ -63,7 +42,7 @@ static web49_interp_data_t wasmimport_draw_point(void* wasi_untyped, web49_inter
   i32 x = interp.locals[0].i32_s;
   i32 y = interp.locals[1].i32_s;
   u32 color = interp.locals[2].i32_u;
-  pntr_draw_point(null0_screen, x, y, color);
+  pntr_draw_point(null0->screen, x, y, color);
   
 }
 
@@ -73,7 +52,7 @@ static web49_interp_data_t wasmimport_draw_line(void* wasi_untyped, web49_interp
   i32 endPosX = interp.locals[2].i32_s;
   i32 endPosY = interp.locals[3].i32_s;
   u32 color = interp.locals[4].i32_u;
-  pntr_draw_line(null0_screen, startPosX, startPosY, endPosX, endPosY, color);
+  pntr_draw_line(null0->screen, startPosX, startPosY, endPosX, endPosY, color);
   
 }
 
@@ -84,7 +63,7 @@ static web49_interp_data_t wasmimport_draw_rectangle_outline(void* wasi_untyped,
   i32 height = interp.locals[3].i32_s;
   i32 thickness = interp.locals[4].i32_s;
   u32 color = interp.locals[5].i32_u;
-  pntr_draw_rectangle(null0_screen, posX, posY, width, height, thickness, color);
+  pntr_draw_rectangle(null0->screen, posX, posY, width, height, thickness, color);
   
 }
 
@@ -94,7 +73,7 @@ static web49_interp_data_t wasmimport_draw_rectangle(void* wasi_untyped, web49_i
   i32 width = interp.locals[2].i32_s;
   i32 height = interp.locals[3].i32_s;
   u32 color = interp.locals[4].i32_u;
-  pntr_draw_rectangle_fill(null0_screen, posX, posY, width, height, color);
+  pntr_draw_rectangle_fill(null0->screen, posX, posY, width, height, color);
   
 }
 
@@ -106,7 +85,7 @@ static web49_interp_data_t wasmimport_draw_triangle_outline(void* wasi_untyped, 
   i32 x3 = interp.locals[4].i32_s;
   i32 y3 = interp.locals[5].i32_s;
   u32 color = interp.locals[6].i32_u;
-  pntr_draw_triangle(null0_screen, x1, y1, x2, y2, x3, y3, color);
+  pntr_draw_triangle(null0->screen, x1, y1, x2, y2, x3, y3, color);
   
 }
 
@@ -118,7 +97,7 @@ static web49_interp_data_t wasmimport_draw_triangle(void* wasi_untyped, web49_in
   i32 x3 = interp.locals[4].i32_s;
   i32 y3 = interp.locals[5].i32_s;
   u32 color = interp.locals[6].i32_u;
-  pntr_draw_triangle_fill(null0_screen, x1, y1, x2, y2, x3, y3, color);
+  pntr_draw_triangle_fill(null0->screen, x1, y1, x2, y2, x3, y3, color);
   
 }
 
@@ -128,7 +107,7 @@ static web49_interp_data_t wasmimport_draw_ellipse_outline(void* wasi_untyped, w
   i32 radiusX = interp.locals[2].i32_s;
   i32 radiusY = interp.locals[3].i32_s;
   u32 color = interp.locals[4].i32_u;
-  pntr_draw_ellipse(null0_screen, centerX, centerY, radiusX, radiusY, color);
+  pntr_draw_ellipse(null0->screen, centerX, centerY, radiusX, radiusY, color);
   
 }
 
@@ -138,7 +117,7 @@ static web49_interp_data_t wasmimport_draw_ellipse(void* wasi_untyped, web49_int
   i32 radiusX = interp.locals[2].i32_s;
   i32 radiusY = interp.locals[3].i32_s;
   u32 color = interp.locals[4].i32_u;
-  pntr_draw_ellipse_fill(null0_screen, centerX, centerY, radiusX, radiusY, color);
+  pntr_draw_ellipse_fill(null0->screen, centerX, centerY, radiusX, radiusY, color);
   
 }
 
@@ -147,7 +126,7 @@ static web49_interp_data_t wasmimport_draw_circle_outline(void* wasi_untyped, we
   i32 centerY = interp.locals[1].i32_s;
   i32 radius = interp.locals[2].i32_s;
   u32 color = interp.locals[3].i32_u;
-  pntr_draw_circle(null0_screen, centerX, centerY, radius, color);
+  pntr_draw_circle(null0->screen, centerX, centerY, radius, color);
   
 }
 
@@ -156,7 +135,7 @@ static web49_interp_data_t wasmimport_draw_circle(void* wasi_untyped, web49_inte
   i32 centerY = interp.locals[1].i32_s;
   i32 radius = interp.locals[2].i32_s;
   u32 color = interp.locals[3].i32_u;
-  pntr_draw_circle_fill(null0_screen, centerX, centerY, radius, color);
+  pntr_draw_circle_fill(null0->screen, centerX, centerY, radius, color);
   
 }
 
@@ -164,7 +143,7 @@ static web49_interp_data_t wasmimport_draw_polygon_outline(void* wasi_untyped, w
   Vec2* points = (Vec2*) interp.memory[interp.locals[0].i32_u];
   i32 numPoints = interp.locals[1].i32_s;
   u32 color = interp.locals[2].i32_u;
-  pntr_draw_polygon(null0_screen, points, numPoints, color);
+  pntr_draw_polygon(null0->screen, points, numPoints, color);
   
 }
 
@@ -172,7 +151,7 @@ static web49_interp_data_t wasmimport_draw_polygon(void* wasi_untyped, web49_int
   Vec2* points = (Vec2*) interp.memory[interp.locals[0].i32_u];
   i32 numPoints = interp.locals[1].i32_s;
   u32 color = interp.locals[2].i32_u;
-  pntr_draw_polygon_fill(null0_screen, points, numPoints, color);
+  pntr_draw_polygon_fill(null0->screen, points, numPoints, color);
   
 }
 
@@ -180,7 +159,7 @@ static web49_interp_data_t wasmimport_draw_polyline(void* wasi_untyped, web49_in
   Vec2* points = (Vec2*) interp.memory[interp.locals[0].i32_u];
   i32 numPoints = interp.locals[1].i32_s;
   u32 color = interp.locals[2].i32_u;
-  pntr_draw_polyline(null0_screen, points, numPoints, color);
+  pntr_draw_polyline(null0->screen, points, numPoints, color);
   
 }
 
@@ -192,7 +171,7 @@ static web49_interp_data_t wasmimport_draw_arc_outline(void* wasi_untyped, web49
   f32 endAngle = interp.locals[4].f32;
   i32 segments = interp.locals[5].i32_s;
   u32 color = interp.locals[6].i32_u;
-  pntr_draw_arc(null0_screen, centerX, centerY, radius, startAngle, endAngle, segments, color);
+  pntr_draw_arc(null0->screen, centerX, centerY, radius, startAngle, endAngle, segments, color);
   
 }
 
@@ -204,7 +183,7 @@ static web49_interp_data_t wasmimport_draw_arc(void* wasi_untyped, web49_interp_
   f32 endAngle = interp.locals[4].f32;
   i32 segments = interp.locals[5].i32_s;
   u32 color = interp.locals[6].i32_u;
-  pntr_draw_arc_fill(null0_screen, centerX, centerY, radius, startAngle, endAngle, segments, color);
+  pntr_draw_arc_fill(null0->screen, centerX, centerY, radius, startAngle, endAngle, segments, color);
   
 }
 
@@ -218,7 +197,7 @@ static web49_interp_data_t wasmimport_draw_rectangle_rounded_outline(void* wasi_
   i32 bottomLeftRadius = interp.locals[6].i32_s;
   i32 bottomRightRadius = interp.locals[7].i32_s;
   u32 color = interp.locals[8].i32_u;
-  pntr_draw_rectangle_rounded(null0_screen, x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius, color);
+  pntr_draw_rectangle_rounded(null0->screen, x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius, color);
   
 }
 
@@ -229,7 +208,7 @@ static web49_interp_data_t wasmimport_draw_rectangle_rounded(void* wasi_untyped,
   i32 height = interp.locals[3].i32_s;
   i32 cornerRadius = interp.locals[4].i32_s;
   u32 color = interp.locals[5].i32_u;
-  pntr_draw_rectangle_rounded_fill(null0_screen, x, y, width, height, cornerRadius, color);
+  pntr_draw_rectangle_rounded_fill(null0->screen, x, y, width, height, cornerRadius, color);
   
 }
 
@@ -237,7 +216,7 @@ static web49_interp_data_t wasmimport_draw_image(void* wasi_untyped, web49_inter
   u32 src = interp.locals[0].i32_u;
   i32 posX = interp.locals[1].i32_s;
   i32 posY = interp.locals[2].i32_s;
-  pntr_draw_image(null0_screen, src, posX, posY);
+  pntr_draw_image(null0->screen, src, posX, posY);
   
 }
 
@@ -246,7 +225,7 @@ static web49_interp_data_t wasmimport_draw_image_tint(void* wasi_untyped, web49_
   i32 posX = interp.locals[1].i32_s;
   i32 posY = interp.locals[2].i32_s;
   u32 tint = interp.locals[3].i32_u;
-  pntr_draw_image_tint(null0_screen, src, posX, posY, tint);
+  pntr_draw_image_tint(null0->screen, src, posX, posY, tint);
   
 }
 
@@ -258,7 +237,7 @@ static web49_interp_data_t wasmimport_draw_image_rotated(void* wasi_untyped, web
   f32 offsetX = interp.locals[4].f32;
   f32 offsetY = interp.locals[5].f32;
   pntr_filter filter = interp.locals[6].i32_u;
-  pntr_draw_image_rotated(null0_screen, src, posX, posY, degrees, offsetX, offsetY, filter);
+  pntr_draw_image_rotated(null0->screen, src, posX, posY, degrees, offsetX, offsetY, filter);
   
 }
 
@@ -268,7 +247,7 @@ static web49_interp_data_t wasmimport_draw_image_flipped(void* wasi_untyped, web
   i32 posY = interp.locals[2].i32_s;
   bool flipHorizontal = interp.locals[3].i32_u;
   bool flipVertical = interp.locals[4].i32_u;
-  pntr_draw_image_flipped(null0_screen, src, posX, posY, flipHorizontal, flipVertical);
+  pntr_draw_image_flipped(null0->screen, src, posX, posY, flipHorizontal, flipVertical);
   
 }
 
@@ -281,7 +260,7 @@ static web49_interp_data_t wasmimport_draw_image_scaled(void* wasi_untyped, web4
   f32 offsetX = interp.locals[5].f32;
   f32 offsetY = interp.locals[6].f32;
   pntr_filter filter = interp.locals[7].i32_u;
-  pntr_draw_image_scaled(null0_screen, src, posX, posY, scaleX, scaleY, offsetX, offsetY, filter);
+  pntr_draw_image_scaled(null0->screen, src, posX, posY, scaleX, scaleY, offsetX, offsetY, filter);
   
 }
 
@@ -291,7 +270,7 @@ static web49_interp_data_t wasmimport_draw_text(void* wasi_untyped, web49_interp
   i32 posX = interp.locals[2].i32_s;
   i32 posY = interp.locals[3].i32_s;
   u32 color = interp.locals[4].i32_u;
-  pntr_draw_text(null0_screen, font, text, posX, posY, color);
+  pntr_draw_text(null0->screen, font, text, posX, posY, color);
   
 }
 
@@ -599,92 +578,92 @@ static web49_interp_data_t wasmimport_stop_sound(void* wasi_untyped, web49_inter
 }
 
 static web49_interp_data_t wasmimport_delta_time(void* wasi_untyped, web49_interp_t interp) {  
-  f32 retVal = pntr_app_delta_time(null0_app);
+  f32 retVal = pntr_app_delta_time(null0->app);
 }
 
 static web49_interp_data_t wasmimport_key_pressed(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_key key = interp.locals[0].undefined;
-  bool retVal = pntr_app_key_pressed(null0_app, key);
+  bool retVal = pntr_app_key_pressed(null0->app, key);
 }
 
 static web49_interp_data_t wasmimport_key_down(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_key key = interp.locals[0].undefined;
-  bool retVal = pntr_app_key_down(null0_app, key);
+  bool retVal = pntr_app_key_down(null0->app, key);
 }
 
 static web49_interp_data_t wasmimport_key_released(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_key key = interp.locals[0].undefined;
-  bool retVal = pntr_app_key_released(null0_app, key);
+  bool retVal = pntr_app_key_released(null0->app, key);
 }
 
 static web49_interp_data_t wasmimport_key_up(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_key key = interp.locals[0].undefined;
-  bool retVal = pntr_app_key_up(null0_app, key);
+  bool retVal = pntr_app_key_up(null0->app, key);
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_pressed(void* wasi_untyped, web49_interp_t interp) {  
   i32 gamepad = interp.locals[0].i32_s;
   pntr_app_gamepad_button key = interp.locals[1].i32_u;
-  bool retVal = pntr_app_gamepad_button_pressed(null0_app, gamepad, key);
+  bool retVal = pntr_app_gamepad_button_pressed(null0->app, gamepad, key);
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_down(void* wasi_untyped, web49_interp_t interp) {  
   i32 gamepad = interp.locals[0].i32_s;
   pntr_app_gamepad_button key = interp.locals[1].i32_u;
-  bool retVal = pntr_app_gamepad_button_down(null0_app, gamepad, key);
+  bool retVal = pntr_app_gamepad_button_down(null0->app, gamepad, key);
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_released(void* wasi_untyped, web49_interp_t interp) {  
   i32 gamepad = interp.locals[0].i32_s;
   pntr_app_gamepad_button key = interp.locals[1].i32_u;
-  bool retVal = pntr_app_gamepad_button_released(null0_app, gamepad, key);
+  bool retVal = pntr_app_gamepad_button_released(null0->app, gamepad, key);
 }
 
 static web49_interp_data_t wasmimport_gamepad_button_up(void* wasi_untyped, web49_interp_t interp) {  
   i32 gamepad = interp.locals[0].i32_s;
   pntr_app_gamepad_button key = interp.locals[1].i32_u;
-  bool retVal = pntr_app_gamepad_button_up(null0_app, gamepad, key);
+  bool retVal = pntr_app_gamepad_button_up(null0->app, gamepad, key);
 }
 
 static web49_interp_data_t wasmimport_mouse_x(void* wasi_untyped, web49_interp_t interp) {  
-  i32 retVal = pntr_app_mouse_x(null0_app);
+  i32 retVal = pntr_app_mouse_x(null0->app);
 }
 
 static web49_interp_data_t wasmimport_mouse_y(void* wasi_untyped, web49_interp_t interp) {  
-  i32 retVal = pntr_app_mouse_y(null0_app);
+  i32 retVal = pntr_app_mouse_y(null0->app);
 }
 
 static web49_interp_data_t wasmimport_mouse_delta_x(void* wasi_untyped, web49_interp_t interp) {  
-  i32 retVal = pntr_app_mouse_delta_x(null0_app);
+  i32 retVal = pntr_app_mouse_delta_x(null0->app);
 }
 
 static web49_interp_data_t wasmimport_mouse_delta_y(void* wasi_untyped, web49_interp_t interp) {  
-  i32 retVal = pntr_app_mouse_delta_y(null0_app);
+  i32 retVal = pntr_app_mouse_delta_y(null0->app);
 }
 
 static web49_interp_data_t wasmimport_mouse_button_pressed(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_mouse_button button = interp.locals[0].undefined;
-  bool retVal = pntr_app_mouse_button_pressed(null0_app, button);
+  bool retVal = pntr_app_mouse_button_pressed(null0->app, button);
 }
 
 static web49_interp_data_t wasmimport_mouse_button_down(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_mouse_button button = interp.locals[0].undefined;
-  bool retVal = pntr_app_mouse_button_down(null0_app, button);
+  bool retVal = pntr_app_mouse_button_down(null0->app, button);
 }
 
 static web49_interp_data_t wasmimport_mouse_button_released(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_mouse_button button = interp.locals[0].undefined;
-  bool retVal = pntr_app_mouse_button_released(null0_app, button);
+  bool retVal = pntr_app_mouse_button_released(null0->app, button);
 }
 
 static web49_interp_data_t wasmimport_mouse_button_up(void* wasi_untyped, web49_interp_t interp) {  
   pntr_app_mouse_button button = interp.locals[0].undefined;
-  bool retVal = pntr_app_mouse_button_up(null0_app, button);
+  bool retVal = pntr_app_mouse_button_up(null0->app, button);
 }
 
 static web49_interp_data_t wasmimport_set_title(void* wasi_untyped, web49_interp_t interp) {  
   const char* title = (const char*) interp.memory[interp.locals[0].i32_u];
-  pntr_app_set_title(null0_app, title);
+  pntr_app_set_title(null0->app, title);
   
 }
 
