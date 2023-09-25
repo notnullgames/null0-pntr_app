@@ -5,11 +5,8 @@ import pntr_api from '../api.json' assert { type: 'json' }
 import null0_map from './null0_map.json' assert { type: 'json' }
 
 const null0_param_map={
-  pntr_color: 'u32',
   'int': 'i32',
-  float: 'f32',
-  'pntr_image*': 'u32',
-  'pntr_vector*': 'Vec2*'
+  float: 'f32'
 }
 
 

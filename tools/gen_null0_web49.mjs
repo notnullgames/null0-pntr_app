@@ -18,7 +18,8 @@ const web49Map = {
   f64: 'f64',
   void: 'void',
   pntr_filter: 'i32_u',
-  pntr_app_gamepad_button: 'i32_u'
+  pntr_app_gamepad_button: 'i32_u',
+  'pntr_image*': 'i32_u'
 }
 
 function get_wasm_args(func) {
@@ -28,13 +29,16 @@ function get_wasm_args(func) {
   }
   return '\n  ' + Object.keys(params).map((p, i) => {
     if (params[p] === 'pntr_sound*') {
-      return `${params[p]} ${p} = null0_sounds[ interp.locals[${i}].${web49Map[params[p]]} ];`
+      return `${params[p]} ${p} = null0->sounds[ interp.locals[${i}].i32_u ];`
     }
     if (params[p] === 'pntr_image*') {
-      return `${params[p]} ${p} = null0_images[ interp.locals[${i}].${web49Map[params[p]]} ];`
+      return `${params[p]} ${p} = null0->images[ interp.locals[${i}].i32_u ];`
     }
     if (params[p] === 'pntr_font*') {
-      return `${params[p]} ${p} = null0_fonts[ interp.locals[${i}].${web49Map[params[p]]} ];`
+      return `${params[p]} ${p} = null0->fonts[ interp.locals[${i}].i32_u ];`
+    }
+    if (params[p] === 'pntr_color') {
+      return `${params[p]} ${p} = pntr_get_color(interp.locals[${i}].i32_u);`
     }
     if (params[p].includes('*')) {
       return `${params[p]} ${p} = (${params[p]}) interp.memory[interp.locals[${i}].i32_u];`
@@ -52,10 +56,10 @@ function get_wasm_call(func) {
     args[0] = 'null0->screen'
   }
   if (func.returns === 'void') {
-    return `${func.pntr_name}(${args.join(', ')});\n`
+    return `${func.pntr_name}(${args.join(', ')});\nreturn (web49_interp_data_t){.i32_u = 0};`
   }
-  return `${func.returns} retVal = ${func.pntr_name}(${args.join(', ')});`
-  return ''
+
+  return `${func.returns} retVal = ${func.pntr_name}(${args.join(', ')});\nreturn (web49_interp_data_t){.${web49Map[func.returns]} = 0};`
 }
 
 
@@ -63,6 +67,7 @@ let out = `// Null0 web49 host-bindings generated at ${new Date().toISOString()}
 
 static web49_interp_data_t wasi_import_generic(void* wasi_untyped, web49_interp_t interp) {
   printf("Unkown import called\\n");
+  return (web49_interp_data_t){.i32_u = 0};
 }
 
 `
@@ -85,16 +90,6 @@ web49_env_func_t web49_api_null0(void* state, const char* mod, const char* func)
     if ${tests.join(' else if ')}
   }
   return web49_env_new(state, ret);
-}
-
-web49_env_func_t web49_main_import_func(void* state, const char* mod, const char* func) {
-  if (strcmp(mod, "null0") == 0) {
-    return web49_api_null0(state, mod, func);
-  } else if (strcmp(mod, "wasi_snapshot_preview1") == 0) {
-    return web49_api_wasi(state, mod, func);
-  }
-  fprintf(stderr, "Unhandled import: %s.%s\\n", mod, func);
-  return NULL;
 }
 `
 

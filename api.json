@@ -2538,6 +2538,44 @@
     ]
   },
   {
+    "name": "pntr_app_random",
+    "returns": "int",
+    "args": [
+      [
+        "min",
+        "int"
+      ],
+      [
+        "max",
+        "int"
+      ]
+    ]
+  },
+  {
+    "name": "pntr_app_random_seed",
+    "returns": "void",
+    "args": [
+      [
+        "seed",
+        "unsigned int"
+      ]
+    ]
+  },
+  {
+    "name": "pntr_app_log",
+    "returns": "void",
+    "args": [
+      [
+        "type",
+        "pntr_app_log_type"
+      ],
+      [
+        "message",
+        "const char*"
+      ]
+    ]
+  },
+  {
     "name": "pntr_app_key_pressed",
     "returns": "bool",
     "args": [
@@ -2776,6 +2814,16 @@
     ]
   },
   {
+    "name": "pntr_app_title",
+    "returns": "const char*",
+    "args": [
+      [
+        "app",
+        "pntr_app*"
+      ]
+    ]
+  },
+  {
     "name": "pntr_app_set_size",
     "returns": "bool",
     "args": [
@@ -2794,7 +2842,21 @@
     ]
   },
   {
-    "name": "pntr_app_file_data",
+    "name": "pntr_app_set_icon",
+    "returns": "void",
+    "args": [
+      [
+        "app",
+        "pntr_app*"
+      ],
+      [
+        "icon",
+        "pntr_image*"
+      ]
+    ]
+  },
+  {
+    "name": "pntr_app_load_arg_file",
     "returns": "void*",
     "args": [
       [
@@ -2804,10 +2866,24 @@
       [
         "size",
         "unsigned int*"
+      ]
+    ]
+  },
+  {
+    "name": "pntr_app_log_ex",
+    "returns": "void",
+    "args": [
+      [
+        "type",
+        "pntr_app_log_type"
       ],
       [
-        "unloadOnExit",
-        "bool"
+        "message",
+        "const char*"
+      ],
+      [
+        "...",
+        ""
       ]
     ]
   }

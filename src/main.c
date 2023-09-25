@@ -1,13 +1,5 @@
 unsigned char* null0_load_file(const char* path, unsigned int* bytesRead);
 
-#include <dirent.h>
-#include <libgen.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <unistd.h>
-
 #define PNTR_LOAD_FILE null0_load_file
 #define PNTR_APP_IMPLEMENTATION
 #define PNTR_ENABLE_DEFAULT_FONT
@@ -47,74 +39,18 @@ AppData* null0;
 // the filename of your cart
 char* cartName = NULL;
 
-unsigned char* null0_load_file(const char* path, unsigned int* bytesRead) {
-  if (null0 == NULL || null0->fs == NULL || path == NULL) {
-    pntr_app_log(PNTR_APP_LOG_ERROR, "Stuff not set.");
-    return NULL;
+#include "null0_utils.h"
+#include "null0_wasm.h"
+
+web49_env_func_t web49_main_import_func(void* state, const char* mod, const char* func) {
+  if (strcmp(mod, "null0") == 0) {
+    return web49_api_null0(state, mod, func);
   }
-
-  // Load the file information from assetsys.
-  assetsys_file_t file;
-  if (assetsys_file(null0->fs, path, &file) != 0) {
-    pntr_app_log(PNTR_APP_LOG_ERROR, "Could not get info.");
-    return NULL;
-  }
-
-  // Find out the size of the file.
-  int size = assetsys_file_size(null0->fs, file);
-  if (size <= 0) {
-    pntr_app_log(PNTR_APP_LOG_ERROR, "Could not get size.");
-    return NULL;
-  }
-
-  // Create the memory buffer.
-  unsigned char* out = PNTR_MALLOC(size);
-  if (out == NULL) {
-    pntr_app_log(PNTR_APP_LOG_ERROR, "Could not malloc");
-    return NULL;
-  }
-
-  // Load the file into the buffer.
-  int outSize = 0;
-  if (assetsys_file_load(null0->fs, file, &outSize, (void*)out, size) != 0) {
-    PNTR_FREE(out);
-    pntr_app_log(PNTR_APP_LOG_ERROR, "Could not load into buffer");
-    return NULL;
-  }
-
-  // Save how many bytes were read.
-  if (bytesRead != NULL) {
-    *bytesRead = outSize;
-  }
-
-  printf("load file: %s - %d\n%s\n", path, outSize, out);
-
-  return out;
-}
-
-char* getDirectoryPath(const char* filePath) {
-  // Find the last occurrence of the directory separator character ('/' or '\') in the file path
-  const char* lastSeparator = strrchr(filePath, '/');
-  if (lastSeparator == NULL) {
-    lastSeparator = strrchr(filePath, '\\');  // Check for Windows-style path separator
-  }
-
-  if (lastSeparator != NULL) {
-    // Calculate the length of the directory path
-    size_t pathLength = lastSeparator - filePath + 1;
-
-    // Allocate memory for the directory path
-    char* directoryPath = (char*)malloc(pathLength + 1);
-
-    // Copy the directory path into the allocated memory
-    strncpy(directoryPath, filePath, pathLength);
-    directoryPath[pathLength] = '\0';  // Null-terminate the string
-
-    return directoryPath;
-  } else {
-    // No directory separator found, return NULL or handle the error accordingly
-    return NULL;
-  }
+  // else if (strcmp(mod, "wasi_snapshot_preview1") == 0) {
+  //   return web49_api_wasi(state, mod, func);
+  // }
+  fprintf(stderr, "Unhandled import: %s.%s\n", mod, func);
+  return NULL;
 }
 
 bool Init(pntr_app* app) {
@@ -163,7 +99,7 @@ bool Init(pntr_app* app) {
   }
 
   unsigned int bytesRead = 0;
-  unsigned char* wasmBytes = null0_load_file("/cart/main.wasm", &bytesRead);
+  unsigned char* wasmBytes = null0_load_file("/main.wasm", &bytesRead);
 
   if (bytesRead == 0) {
     pntr_app_log(PNTR_APP_LOG_ERROR, "File not found: main.wasm");
@@ -185,6 +121,35 @@ bool Init(pntr_app* app) {
   };
 
   web49_module_t mod = web49_readbin_module(&infile);
+
+  web49_section_import_t imports = web49_module_get_section(mod, WEB49_SECTION_ID_IMPORT).import_section;
+  for (size_t j = 0; j < imports.num_entries; j++) {
+    web49_section_import_entry_t entry = imports.entries[j];
+    // printf("import: %s.%s\n", entry.module_str, entry.field_str);
+  }
+
+  web49_section_export_t exports = web49_module_get_section(mod, WEB49_SECTION_ID_EXPORT).export_section;
+  for (size_t j = 0; j < exports.num_entries; j++) {
+    web49_section_export_entry_t entry = exports.entries[j];
+    // printf("export: %s\n", entry.field_str);
+    if (strcmp(entry.field_str, "load") == 0 || strcmp(entry.field_str, "_start") == 0) {
+      null0->cart_load = entry.index;
+    } else if (strcmp(entry.field_str, "update") == 0) {
+      null0->cart_update = entry.index;
+    }
+  }
+
+  web49_opt_tee_module(&mod);
+  web49_opt_tree_module(&mod);
+
+  web49_interp_t interp = web49_interp_module(mod);
+  web49_interp_add_import_func(&interp, NULL, web49_main_import_func);
+
+  if (null0->cart_load) {
+    web49_interp_block_run(&interp, &interp.funcs[null0->cart_load]);
+  } else {
+    printf("no load function.\n");
+  }
 
   return true;
 }
