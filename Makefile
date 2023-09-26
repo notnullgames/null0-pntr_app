@@ -39,7 +39,11 @@ web: ## Run development web-server
 	npx -y live-server docs
 
 .PHONY: all
-all: carts runtime_raylib runtime_sdl runtime_libretro runtime_cli ## Build all the things
+all: carts runtime ## Build all the things
+
+.PHONY: runtime
+runtime: ## Build all native runtime hosts at once
+	cmake -B build -DSDL=true -DRAYLIB=true -DLIBRETRO=false -DCLI=true && cmake --build build
 
 .PHONY: runtime_raylib
 runtime_raylib: ## Build raylib host
