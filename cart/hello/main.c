@@ -10,7 +10,7 @@ int main() {
 
 NULL0_EXPORT("update")
 void update(u32 t) {
-  clear(RED);
-  // draw_text(0, "Hello from null0", w + 1, (HEIGHT / 2) + 1, DARKBLUE);
+  clear(GREEN);
+  draw_text(0, "Hello from null0", w + 1, (HEIGHT / 2) + 1, DARKBLUE);
   // draw_text(0, "Hello from null0", w, HEIGHT / 2, RED);
 }

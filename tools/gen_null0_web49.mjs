@@ -99,6 +99,8 @@ function get_web49_wasm_args (func) {
       out.push(`pntr_font* ${p} = null0->fonts[ interp.locals[${i}].i32_u ];`)
     } else if (params[p] === 'pntr_color') {
       out.push(`pntr_color ${p} = pntr_get_color(interp.locals[${i}].i32_u);`)
+    } else if (params[p] === 'const char*') {
+      out.push(`char* ${p} = WEB49_INTERP_ADDR(char*, interp, interp.locals[${i}].i32_u, 0);`)
     } else if (params[p].includes('*')) {
       out.push(`${params[p]} ${p} = (${params[p]}) interp.memory[interp.locals[${i}].i32_u];`)
     } else {
