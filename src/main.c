@@ -50,8 +50,6 @@ char* cartName = NULL;
 #include "null0_wasm.h"
 
 web49_env_func_t web49_main_import_func(void* state, const char* mod, const char* func) {
-  printf("called: %s.%s\n", mod, func);
-
   if (strcmp(mod, "null0") == 0) {
     return web49_api_null0(state, mod, func);
   } else if (strcmp(mod, "wasi_snapshot_preview1") == 0) {

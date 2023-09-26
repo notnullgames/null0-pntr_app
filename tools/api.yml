@@ -823,7 +823,7 @@ image_alpha_border:
   args:
     image: pntr_image*
     threshold: f32
-  returns: pntr_rectangle
+  returns: pntr_rectangle*
 
 image_crop:
   host_name: pntr_image_crop

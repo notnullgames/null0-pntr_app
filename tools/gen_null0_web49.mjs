@@ -67,10 +67,24 @@ function get_web49_body_return (func) {
   if (func.returns === 'pntr_sound*') {
     return `  return (web49_interp_data_t){.i32_u = null0_add_sound(${func.host_name}(${callArgs.join(', ')}))};`
   }
+  if (func.returns === 'pntr_color') {
+    return `  return (web49_interp_data_t){.i32_u = ${func.host_name}(${callArgs.join(', ')}).data };`
+  }
+  if (func.returns === 'void') {
+    return `
+  ${func.host_name}(${callArgs.join(', ')});
+  return (web49_interp_data_t){.i32_u = 0};
+  `
+  }
+
+  // TODO: deal with these types
+  if (['unsigned char*', 'const char*', 'pntr_rectangle*', ' pntr_vector*'].includes(func.type)) {
+    return `${func.host_name}(${callArgs.join(', ')});
+    return (web49_interp_data_t){.i32_u = 0};`
+  }
 
   return `
-  ${func.host_name}(${callArgs.join(', ')});
-  return (web49_interp_data_t){.i32_u = 0};`
+  return (web49_interp_data_t){.${web49Map[func.returns] || 'i32_u'} = ${func.host_name}(${callArgs.join(', ')})};`
 }
 
 function get_web49_wasm_args (func) {
