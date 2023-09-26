@@ -1,4 +1,4 @@
-// Null0 web49 host-bindings generated at 2023-09-25T12:37:16.936Z
+// Null0 web49 host-bindings generated at 2023-09-26T02:26:26.349Z
 
 void null0_clear_screen(pntr_color color) {
   pntr_clear_background(null0->screen, color);
@@ -27,7 +27,7 @@ static web49_interp_data_t wasmimport_new_image(void* wasi_untyped, web49_interp
   
   i32 width = interp.locals[0].i32_s;
   i32 height = interp.locals[1].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color color = { .data = interp.locals[2].i32_u };
 
   return (web49_interp_data_t){.i32_u = null0_add_image(pntr_gen_image_color(width, height, color))};
 }
@@ -61,7 +61,7 @@ static web49_interp_data_t wasmimport_unload_image(void* wasi_untyped, web49_int
 
 static web49_interp_data_t wasmimport_clear(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color color = { .data = interp.locals[0].i32_u };
 
 
   null0_clear_screen(color);
@@ -71,7 +71,7 @@ static web49_interp_data_t wasmimport_clear(void* wasi_untyped, web49_interp_t i
 static web49_interp_data_t wasmimport_clear_image(void* wasi_untyped, web49_interp_t interp) {
   
   pntr_image* image = null0->images[ interp.locals[0].i32_u ];
-  pntr_color color = pntr_get_color(interp.locals[1].i32_u);
+  pntr_color color = { .data = interp.locals[1].i32_u };
 
 
   pntr_clear_background(image, color);
@@ -83,7 +83,7 @@ static web49_interp_data_t wasmimport_draw_point(void* wasi_untyped, web49_inter
   pntr_image* dst = null0->screen;
   i32 x = interp.locals[0].i32_s;
   i32 y = interp.locals[1].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color color = { .data = interp.locals[2].i32_u };
 
 
   pntr_draw_point(dst, x, y, color);
@@ -97,7 +97,7 @@ static web49_interp_data_t wasmimport_draw_line(void* wasi_untyped, web49_interp
   i32 startPosY = interp.locals[1].i32_s;
   i32 endPosX = interp.locals[2].i32_s;
   i32 endPosY = interp.locals[3].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+  pntr_color color = { .data = interp.locals[4].i32_u };
 
 
   pntr_draw_line(dst, startPosX, startPosY, endPosX, endPosY, color);
@@ -112,7 +112,7 @@ static web49_interp_data_t wasmimport_draw_rectangle_outline(void* wasi_untyped,
   i32 width = interp.locals[2].i32_s;
   i32 height = interp.locals[3].i32_s;
   i32 thickness = interp.locals[4].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[5].i32_u);
+  pntr_color color = { .data = interp.locals[5].i32_u };
 
 
   pntr_draw_rectangle(dst, posX, posY, width, height, thickness, color);
@@ -126,7 +126,7 @@ static web49_interp_data_t wasmimport_draw_rectangle(void* wasi_untyped, web49_i
   i32 posY = interp.locals[1].i32_s;
   i32 width = interp.locals[2].i32_s;
   i32 height = interp.locals[3].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+  pntr_color color = { .data = interp.locals[4].i32_u };
 
 
   pntr_draw_rectangle_fill(dst, posX, posY, width, height, color);
@@ -142,7 +142,7 @@ static web49_interp_data_t wasmimport_draw_triangle_outline(void* wasi_untyped, 
   i32 y2 = interp.locals[3].i32_s;
   i32 x3 = interp.locals[4].i32_s;
   i32 y3 = interp.locals[5].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+  pntr_color color = { .data = interp.locals[6].i32_u };
 
 
   pntr_draw_triangle(dst, x1, y1, x2, y2, x3, y3, color);
@@ -158,7 +158,7 @@ static web49_interp_data_t wasmimport_draw_triangle(void* wasi_untyped, web49_in
   i32 y2 = interp.locals[3].i32_s;
   i32 x3 = interp.locals[4].i32_s;
   i32 y3 = interp.locals[5].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+  pntr_color color = { .data = interp.locals[6].i32_u };
 
 
   pntr_draw_triangle_fill(dst, x1, y1, x2, y2, x3, y3, color);
@@ -172,7 +172,7 @@ static web49_interp_data_t wasmimport_draw_ellipse_outline(void* wasi_untyped, w
   i32 centerY = interp.locals[1].i32_s;
   i32 radiusX = interp.locals[2].i32_s;
   i32 radiusY = interp.locals[3].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+  pntr_color color = { .data = interp.locals[4].i32_u };
 
 
   pntr_draw_ellipse(dst, centerX, centerY, radiusX, radiusY, color);
@@ -186,7 +186,7 @@ static web49_interp_data_t wasmimport_draw_ellipse(void* wasi_untyped, web49_int
   i32 centerY = interp.locals[1].i32_s;
   i32 radiusX = interp.locals[2].i32_s;
   i32 radiusY = interp.locals[3].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+  pntr_color color = { .data = interp.locals[4].i32_u };
 
 
   pntr_draw_ellipse_fill(dst, centerX, centerY, radiusX, radiusY, color);
@@ -199,7 +199,7 @@ static web49_interp_data_t wasmimport_draw_circle_outline(void* wasi_untyped, we
   i32 centerX = interp.locals[0].i32_s;
   i32 centerY = interp.locals[1].i32_s;
   i32 radius = interp.locals[2].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[3].i32_u);
+  pntr_color color = { .data = interp.locals[3].i32_u };
 
 
   pntr_draw_circle(dst, centerX, centerY, radius, color);
@@ -212,7 +212,7 @@ static web49_interp_data_t wasmimport_draw_circle(void* wasi_untyped, web49_inte
   i32 centerX = interp.locals[0].i32_s;
   i32 centerY = interp.locals[1].i32_s;
   i32 radius = interp.locals[2].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[3].i32_u);
+  pntr_color color = { .data = interp.locals[3].i32_u };
 
 
   pntr_draw_circle_fill(dst, centerX, centerY, radius, color);
@@ -224,7 +224,7 @@ static web49_interp_data_t wasmimport_draw_polygon_outline(void* wasi_untyped, w
   pntr_image* dst = null0->screen;
   pntr_vector* points = (pntr_vector*) interp.memory[interp.locals[0].i32_u];
   i32 numPoints = interp.locals[1].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color color = { .data = interp.locals[2].i32_u };
 
 
   pntr_draw_polygon(dst, points, numPoints, color);
@@ -236,7 +236,7 @@ static web49_interp_data_t wasmimport_draw_polygon(void* wasi_untyped, web49_int
   pntr_image* dst = null0->screen;
   pntr_vector* points = (pntr_vector*) interp.memory[interp.locals[0].i32_u];
   i32 numPoints = interp.locals[1].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color color = { .data = interp.locals[2].i32_u };
 
 
   pntr_draw_polygon_fill(dst, points, numPoints, color);
@@ -248,7 +248,7 @@ static web49_interp_data_t wasmimport_draw_polyline(void* wasi_untyped, web49_in
   pntr_image* dst = null0->screen;
   pntr_vector* points = (pntr_vector*) interp.memory[interp.locals[0].i32_u];
   i32 numPoints = interp.locals[1].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color color = { .data = interp.locals[2].i32_u };
 
 
   pntr_draw_polyline(dst, points, numPoints, color);
@@ -264,7 +264,7 @@ static web49_interp_data_t wasmimport_draw_arc_outline(void* wasi_untyped, web49
   f32 startAngle = interp.locals[3].f32;
   f32 endAngle = interp.locals[4].f32;
   i32 segments = interp.locals[5].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+  pntr_color color = { .data = interp.locals[6].i32_u };
 
 
   pntr_draw_arc(dst, centerX, centerY, radius, startAngle, endAngle, segments, color);
@@ -280,7 +280,7 @@ static web49_interp_data_t wasmimport_draw_arc(void* wasi_untyped, web49_interp_
   f32 startAngle = interp.locals[3].f32;
   f32 endAngle = interp.locals[4].f32;
   i32 segments = interp.locals[5].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[6].i32_u);
+  pntr_color color = { .data = interp.locals[6].i32_u };
 
 
   pntr_draw_arc_fill(dst, centerX, centerY, radius, startAngle, endAngle, segments, color);
@@ -298,7 +298,7 @@ static web49_interp_data_t wasmimport_draw_rectangle_rounded_outline(void* wasi_
   i32 topRightRadius = interp.locals[5].i32_s;
   i32 bottomLeftRadius = interp.locals[6].i32_s;
   i32 bottomRightRadius = interp.locals[7].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[8].i32_u);
+  pntr_color color = { .data = interp.locals[8].i32_u };
 
 
   pntr_draw_rectangle_rounded(dst, x, y, width, height, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius, color);
@@ -313,7 +313,7 @@ static web49_interp_data_t wasmimport_draw_rectangle_rounded(void* wasi_untyped,
   i32 width = interp.locals[2].i32_s;
   i32 height = interp.locals[3].i32_s;
   i32 cornerRadius = interp.locals[4].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[5].i32_u);
+  pntr_color color = { .data = interp.locals[5].i32_u };
 
 
   pntr_draw_rectangle_rounded_fill(dst, x, y, width, height, cornerRadius, color);
@@ -338,7 +338,7 @@ static web49_interp_data_t wasmimport_draw_image_tint(void* wasi_untyped, web49_
   pntr_image* src = null0->images[ interp.locals[0].i32_u ];
   i32 posX = interp.locals[1].i32_s;
   i32 posY = interp.locals[2].i32_s;
-  pntr_color tint = pntr_get_color(interp.locals[3].i32_u);
+  pntr_color tint = { .data = interp.locals[3].i32_u };
 
 
   pntr_draw_image_tint(dst, src, posX, posY, tint);
@@ -399,7 +399,7 @@ static web49_interp_data_t wasmimport_draw_text(void* wasi_untyped, web49_interp
   const char* text = (const char*) interp.memory[interp.locals[1].i32_u];
   i32 posX = interp.locals[2].i32_s;
   i32 posY = interp.locals[3].i32_s;
-  pntr_color color = pntr_get_color(interp.locals[4].i32_u);
+  pntr_color color = { .data = interp.locals[4].i32_u };
 
 
   pntr_draw_text(dst, font, text, posX, posY, color);
@@ -441,7 +441,7 @@ static web49_interp_data_t wasmimport_image_resize(void* wasi_untyped, web49_int
   i32 newHeight = interp.locals[2].i32_s;
   i32 offsetX = interp.locals[3].i32_s;
   i32 offsetY = interp.locals[4].i32_s;
-  pntr_color fill = pntr_get_color(interp.locals[5].i32_u);
+  pntr_color fill = { .data = interp.locals[5].i32_u };
 
 
   pntr_image_resize_canvas(image, newWidth, newHeight, offsetX, offsetY, fill);
@@ -461,8 +461,8 @@ static web49_interp_data_t wasmimport_image_scale(void* wasi_untyped, web49_inte
 static web49_interp_data_t wasmimport_image_color_replace(void* wasi_untyped, web49_interp_t interp) {
   
   pntr_image* image = null0->images[ interp.locals[0].i32_u ];
-  pntr_color color = pntr_get_color(interp.locals[1].i32_u);
-  pntr_color replace = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color color = { .data = interp.locals[1].i32_u };
+  pntr_color replace = { .data = interp.locals[2].i32_u };
 
 
   pntr_image_color_replace(image, color, replace);
@@ -471,8 +471,8 @@ static web49_interp_data_t wasmimport_image_color_replace(void* wasi_untyped, we
 
 static web49_interp_data_t wasmimport_color_tint(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
-  pntr_color tint = pntr_get_color(interp.locals[1].i32_u);
+  pntr_color color = { .data = interp.locals[0].i32_u };
+  pntr_color tint = { .data = interp.locals[1].i32_u };
 
 
   pntr_color_tint(color, tint);
@@ -482,7 +482,7 @@ static web49_interp_data_t wasmimport_color_tint(void* wasi_untyped, web49_inter
 static web49_interp_data_t wasmimport_image_color_tint(void* wasi_untyped, web49_interp_t interp) {
   
   pntr_image* image = null0->images[ interp.locals[0].i32_u ];
-  pntr_color color = pntr_get_color(interp.locals[1].i32_u);
+  pntr_color color = { .data = interp.locals[1].i32_u };
 
 
   pntr_image_color_tint(image, color);
@@ -491,7 +491,7 @@ static web49_interp_data_t wasmimport_image_color_tint(void* wasi_untyped, web49
 
 static web49_interp_data_t wasmimport_color_fade(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color color = { .data = interp.locals[0].i32_u };
   f32 alpha = interp.locals[1].f32;
 
 
@@ -511,7 +511,7 @@ static web49_interp_data_t wasmimport_image_color_fade(void* wasi_untyped, web49
 
 static web49_interp_data_t wasmimport_color_brightness(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color color = { .data = interp.locals[0].i32_u };
   f32 factor = interp.locals[1].f32;
 
 
@@ -575,7 +575,7 @@ static web49_interp_data_t wasmimport_gen_image_text(void* wasi_untyped, web49_i
   
   pntr_font* font = null0->fonts[ interp.locals[0].i32_u ];
   const char* text = (const char*) interp.memory[interp.locals[1].i32_u];
-  pntr_color tint = pntr_get_color(interp.locals[2].i32_u);
+  pntr_color tint = { .data = interp.locals[2].i32_u };
 
   return (web49_interp_data_t){.i32_u = null0_add_image(pntr_gen_image_text(font, text, tint))};
 }
@@ -647,7 +647,7 @@ static web49_interp_data_t wasmimport_load_font_ttf(void* wasi_untyped, web49_in
 
 static web49_interp_data_t wasmimport_color_invert(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color color = { .data = interp.locals[0].i32_u };
 
 
   pntr_color_invert(color);
@@ -665,8 +665,8 @@ static web49_interp_data_t wasmimport_image_color_invert(void* wasi_untyped, web
 
 static web49_interp_data_t wasmimport_color_alpha_blend(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color dst = pntr_get_color(interp.locals[0].i32_u);
-  pntr_color src = pntr_get_color(interp.locals[1].i32_u);
+  pntr_color dst = { .data = interp.locals[0].i32_u };
+  pntr_color src = { .data = interp.locals[1].i32_u };
 
 
   pntr_color_alpha_blend(dst, src);
@@ -729,7 +729,7 @@ static web49_interp_data_t wasmimport_image_flip(void* wasi_untyped, web49_inter
 
 static web49_interp_data_t wasmimport_color_contrast(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color color = pntr_get_color(interp.locals[0].i32_u);
+  pntr_color color = { .data = interp.locals[0].i32_u };
   f32 contrast = interp.locals[1].f32;
 
 
@@ -772,20 +772,20 @@ static web49_interp_data_t wasmimport_image_gradient(void* wasi_untyped, web49_i
   
   i32 width = interp.locals[0].i32_s;
   i32 height = interp.locals[1].i32_s;
-  pntr_color topLeft = pntr_get_color(interp.locals[2].i32_u);
-  pntr_color topRight = pntr_get_color(interp.locals[3].i32_u);
-  pntr_color bottomLeft = pntr_get_color(interp.locals[4].i32_u);
-  pntr_color bottomRight = pntr_get_color(interp.locals[5].i32_u);
+  pntr_color topLeft = { .data = interp.locals[2].i32_u };
+  pntr_color topRight = { .data = interp.locals[3].i32_u };
+  pntr_color bottomLeft = { .data = interp.locals[4].i32_u };
+  pntr_color bottomRight = { .data = interp.locals[5].i32_u };
 
   return (web49_interp_data_t){.i32_u = null0_add_image(pntr_gen_image_gradient(width, height, topLeft, topRight, bottomLeft, bottomRight))};
 }
 
 static web49_interp_data_t wasmimport_color_bilinear_interpolate(void* wasi_untyped, web49_interp_t interp) {
   
-  pntr_color color00 = pntr_get_color(interp.locals[0].i32_u);
-  pntr_color color01 = pntr_get_color(interp.locals[1].i32_u);
-  pntr_color color10 = pntr_get_color(interp.locals[2].i32_u);
-  pntr_color color11 = pntr_get_color(interp.locals[3].i32_u);
+  pntr_color color00 = { .data = interp.locals[0].i32_u };
+  pntr_color color01 = { .data = interp.locals[1].i32_u };
+  pntr_color color10 = { .data = interp.locals[2].i32_u };
+  pntr_color color11 = { .data = interp.locals[3].i32_u };
   f32 coordinateX = interp.locals[4].f32;
   f32 coordinateY = interp.locals[5].f32;
 

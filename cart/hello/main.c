@@ -5,6 +5,7 @@ f32 w = 0;
 int main() {
   // width for centered text
   w = (WIDTH / 2) - measure_text(0, "Hello from null0") / 2;
+  return 0;
 }
 
 NULL0_EXPORT("update")
