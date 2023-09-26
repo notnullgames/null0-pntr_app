@@ -17,34 +17,34 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 typedef float f32;
 
-#define RGBA(r, g, b, a) (u32)(a << 24 | b << 16 | g << 8 | r)
+#define RGBA(r, g, b, a) (u32)(r << 24 | g << 16 | b << 8 | a)
 
-#define LIGHTGRAY RGBA(200, 200, 200, 255)  // Light Gray
-#define GRAY RGBA(130, 130, 130, 255)       // Gray
-#define DARKGRAY RGBA(80, 80, 80, 255)      // Dark Gray
-#define YELLOW RGBA(253, 249, 0, 255)       // Yellow
-#define GOLD RGBA(255, 203, 0, 255)         // Gold
-#define ORANGE RGBA(255, 161, 0, 255)       // Orange
-#define PINK RGBA(255, 109, 194, 255)       // Pink
-#define RED RGBA(230, 41, 55, 255)          // Red
-#define MAROON RGBA(190, 33, 55, 255)       // Maroon
-#define GREEN RGBA(0, 228, 48, 255)         // Green
-#define LIME RGBA(0, 158, 47, 255)          // Lime
-#define DARKGREEN RGBA(0, 117, 44, 255)     // Dark Green
-#define SKYBLUE RGBA(102, 191, 255, 255)    // Sky Blue
-#define BLUE RGBA(0, 121, 241, 255)         // Blue
-#define DARKBLUE RGBA(0, 82, 172, 255)      // Dark Blue
-#define PURPLE RGBA(200, 122, 255, 255)     // Purple
-#define VIOLET RGBA(135, 60, 190, 255)      // Violet
-#define DARKPURPLE RGBA(112, 31, 126, 255)  // Dark Purple
-#define BEIGE RGBA(211, 176, 131, 255)      // Beige
-#define BROWN RGBA(127, 106, 79, 255)       // Brown
-#define DARKBROWN RGBA(76, 63, 47, 255)     // Dark Brown
-#define WHITE RGBA(255, 255, 255, 255)      // White
-#define BLACK RGBA(0, 0, 0, 255)            // Black
-#define BLANK RGBA(0, 0, 0, 0)              // Blank (Transparent)
-#define MAGENTA RGBA(255, 0, 255, 255)      // Magenta
-#define RAYWHITE RGBA(245, 245, 245, 255)   // (raylib logo white)
+#define LIGHTGRAY RGBA(200, 200, 200, 255)
+#define GRAY RGBA(130, 130, 130, 255)
+#define DARKGRAY RGBA(80, 80, 80, 255)
+#define YELLOW RGBA(253, 249, 0, 255)
+#define GOLD RGBA(255, 203, 0, 255)
+#define ORANGE RGBA(255, 161, 0, 255)
+#define PINK RGBA(255, 109, 194, 255)
+#define RED RGBA(230, 41, 55, 255)
+#define MAROON RGBA(190, 33, 55, 255)
+#define GREEN RGBA(0, 228, 48, 255)
+#define LIME RGBA(0, 158, 47, 255)
+#define DARKGREEN RGBA(0, 117, 44, 255)
+#define SKYBLUE RGBA(102, 191, 255, 255)
+#define BLUE RGBA(0, 121, 241, 255)
+#define DARKBLUE RGBA(0, 82, 172, 255)
+#define PURPLE RGBA(200, 122, 255, 255)
+#define VIOLET RGBA(135, 60, 190, 255)
+#define DARKPURPLE RGBA(112, 31, 126, 255)
+#define BEIGE RGBA(211, 176, 131, 255)
+#define BROWN RGBA(127, 106, 79, 255)
+#define DARKBROWN RGBA(76, 63, 47, 255)
+#define WHITE RGBA(255, 255, 255, 255)
+#define BLACK RGBA(0, 0, 0, 255)
+#define BLANK RGBA(0, 0, 0, 0)
+#define MAGENTA RGBA(255, 0, 255, 255)
+#define RAYWHITE RGBA(245, 245, 245, 255)
 
 typedef enum Filter {
   FILTER_NEARESTNEIGHBOR = 0,
@@ -232,7 +232,7 @@ typedef struct Rectangle {
 
 
 NULL0_IMPORT("trace")
-void trace(const char* str,  ...);
+void trace(const char* str);
 
 NULL0_IMPORT("new_image")
 u32 new_image(i32 width, i32 height, u32 color);
