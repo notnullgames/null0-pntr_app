@@ -37,15 +37,6 @@ image_subimage:
     height: i32
   returns: pntr_image*
 
-unload_image:
-  host_name: pntr_unload_image
-  host_args:
-    image: pntr_image*
-  host_returns: void
-  args:
-    image: pntr_image*
-  returns: void
-
 clear:
   host_name: null0_clear_screen
   host_args:
@@ -627,15 +618,6 @@ color_brightness:
     factor: f32
   returns: pntr_color
 
-unload_font:
-  host_name: pntr_unload_font
-  host_args:
-    font: pntr_font*
-  host_returns: void
-  args:
-    font: pntr_font*
-  returns: void
-
 font_copy:
   host_name: pntr_font_copy
   host_args:
@@ -747,15 +729,6 @@ load_file:
     bytesRead: unsigned int*
   returns: unsigned char*
 
-unload_file:
-  host_name: pntr_unload_file
-  host_args:
-    fileData: unsigned char*
-  host_returns: void
-  args:
-    fileData: unsigned char*
-  returns: void
-
 load_file_text:
   host_name: pntr_load_file_text
   host_args:
@@ -764,15 +737,6 @@ load_file_text:
   args:
     fileName: const char*
   returns: const char*
-
-unload_file_text:
-  host_name: pntr_unload_file_text
-  host_args:
-    text: const char*
-  host_returns: void
-  args:
-    text: const char*
-  returns: void
 
 load_font_ttf:
   host_name: pntr_load_font_ttf
@@ -973,15 +937,6 @@ load_sound:
   args:
     fileName: const char*
   returns: pntr_sound*
-
-unload_sound:
-  host_name: pntr_unload_sound
-  host_args:
-    sound: pntr_sound*
-  host_returns: void
-  args:
-    sound: pntr_sound*
-  returns: void
 
 play_sound:
   host_name: pntr_play_sound

@@ -78,8 +78,9 @@ function get_web49_body_return (func) {
   }
 
   // TODO: deal with these types
-  if (['unsigned char*', 'const char*', 'pntr_rectangle*', ' pntr_vector*'].includes(func.type)) {
-    return `${func.host_name}(${callArgs.join(', ')});
+  if (['unsigned char*', 'const char*', 'pntr_rectangle', 'pntr_rectangle*', 'pntr_vector*'].includes(func.returns)) {
+    return `// TODO: return ${func.returns}
+    ${func.host_name}(${callArgs.join(', ')});
     return (web49_interp_data_t){.i32_u = 0};`
   }
 

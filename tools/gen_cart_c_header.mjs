@@ -247,6 +247,7 @@ const typeMap = {
   'pntr_font*': 'u32',
   pntr_filter: 'Filter',
   pntr_rectangle: 'Rectangle',
+  'pntr_rectangle*': 'Rectangle*',
   'pntr_sound*': 'u32',
   pntr_app_key: 'Key',
   pntr_app_gamepad_button: 'GamepadButton',
@@ -254,7 +255,7 @@ const typeMap = {
 }
 
 for (const name of Object.keys(api)) {
-  const func = {name, ...api[name]}
+  const func = { name, ...api[name] }
 
   out += `
 NULL0_IMPORT("${func.name}")
