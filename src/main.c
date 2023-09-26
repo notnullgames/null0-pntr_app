@@ -52,9 +52,10 @@ char* cartName = NULL;
 web49_env_func_t web49_main_import_func(void* state, const char* mod, const char* func) {
   if (strcmp(mod, "null0") == 0) {
     return web49_api_null0(state, mod, func);
-  } else if (strcmp(mod, "wasi_snapshot_preview1") == 0) {
-    return web49_api_wasi(state, mod, func);
   }
+  // else if (strcmp(mod, "wasi_snapshot_preview1") == 0) {
+  //   return web49_api_wasi(state, mod, func);
+  // }
   fprintf(stderr, "Unhandled import: %s.%s\n", mod, func);
   return NULL;
 }

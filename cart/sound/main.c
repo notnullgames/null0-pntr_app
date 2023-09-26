@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include "null0.h"
+#include <null0.h>
 
 u32 bd;
 u32 sd;

@@ -1,4 +1,9 @@
-// Null0 web49 host-bindings generated at 2023-09-26T16:47:39.374Z
+// Null0 web49 host-bindings generated at 2023-09-26T17:02:33.734Z
+
+// TODO: add vargs
+void null0_trace(const char* str) {
+  printf("%s\n", str);
+}
 
 void null0_clear_screen(pntr_color color) {
   pntr_clear_background(null0->screen, color);
@@ -21,6 +26,16 @@ u32 null0_add_sound(pntr_sound* sound) {
 
 pntr_vector* null0_mouse_position(){
   // TODO
+}
+
+static web49_interp_data_t wasmimport_trace(void* wasi_untyped, web49_interp_t interp) {
+  
+  char* str = WEB49_INTERP_ADDR(char*, interp, interp.locals[0].i32_u, 0);
+
+
+  null0_trace(str);
+  return (web49_interp_data_t){.i32_u = 0};
+  
 }
 
 static web49_interp_data_t wasmimport_new_image(void* wasi_untyped, web49_interp_t interp) {
@@ -941,7 +956,9 @@ web49_env_func_t web49_api_null0(void* state, const char* mod, const char* func)
   web49_env_func_t ret = NULL;
 
   if (!strcmp(mod, "null0")) {
-    if (strcmp(func, "new_image") == 0){
+    if (strcmp(func, "trace") == 0){
+      ret = &wasmimport_trace;
+    } else if (strcmp(func, "new_image") == 0){
       ret = &wasmimport_new_image;
     } else if (strcmp(func, "image_copy") == 0){
       ret = &wasmimport_image_copy;

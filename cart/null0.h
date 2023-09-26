@@ -231,6 +231,9 @@ typedef struct Rectangle {
 #define HEIGHT 240
 
 
+NULL0_IMPORT("trace")
+void trace(const char* str,  ...);
+
 NULL0_IMPORT("new_image")
 u32 new_image(i32 width, i32 height, u32 color);
 

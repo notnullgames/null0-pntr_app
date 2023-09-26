@@ -1,6 +1,6 @@
-#include <stdio.h>
+#include <null0.h>
 
 int main() {
-  printf("Hello from justlog.\n");
+  trace("Hello from justlog.");
   return 0;
 }

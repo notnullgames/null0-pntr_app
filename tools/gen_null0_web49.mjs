@@ -31,6 +31,11 @@ const web49Map = {
 
 let out = `// Null0 web49 host-bindings generated at ${new Date().toISOString()}
 
+// TODO: add vargs
+void null0_trace(const char* str) {
+  printf("%s\\n", str);
+}
+
 void null0_clear_screen(pntr_color color) {
   pntr_clear_background(null0->screen, color);
 }
