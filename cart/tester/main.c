@@ -11,6 +11,7 @@ int main() {
 
   logo = load_image("assets/logo.png");
   sound = load_sound("assets/notnullgames.ogg");
+  play_sound(sound, false);
 
   return 0;
 }

@@ -25,6 +25,16 @@ typedef uint32_t u32;
 typedef uint64_t u64;
 typedef float f32;
 
+NULL0_EXPORT("malloc")
+void* _null0_malloc(size_t size) {
+  return malloc(size);
+}
+
+NULL0_EXPORT("free")
+void _null0_free(void* ptr) {
+  free(ptr);
+}
+
 #define RGBA(r, g, b, a) (u32)(r << 24 | g << 16 | b << 8 | a)
 
 #define LIGHTGRAY RGBA(200, 200, 200, 255)

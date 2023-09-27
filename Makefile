@@ -24,15 +24,15 @@ ${DIR_WEB}/hello.null0: ${DIR_OUT}/hello.wasm
 
 ${DIR_WEB}/files.null0: ${DIR_OUT}/files.wasm
 	@cd ${DIR_OUT} && cp $? main.wasm && zip -r $@ main.wasm && rm main.wasm
-	@cd ${DIR_CART}/files && zip -r $@ . -x "*.c" -x "*.h" -x .DS_Store
+	@cd ${DIR_CART}/files && zip -r $@ . -x "*.c" -x "*.h" -x "*/.DS_Store"
 
 ${DIR_WEB}/sound.null0: ${DIR_OUT}/sound.wasm
 	@cd ${BUILD_DIR} && cp $? main.wasm && zip -r $@ main.wasm && rm main.wasm
-	@cd ${DIR_CART}/sound && zip -r $@ . -x "*.c" -x "*.h" -x .DS_Store
+	@cd ${DIR_CART}/sound && zip -r $@ . -x "*.c" -x "*.h" -x "*/.DS_Store"
 
 ${DIR_WEB}/tester.null0: ${DIR_OUT}/tester.wasm
 	@cd ${BUILD_DIR} && cp $? main.wasm && zip -r $@ main.wasm && rm main.wasm
-	@cd ${DIR_CART}/tester && zip -r $@ . -x "*.c" -x "*.h" -x .DS_Store
+	@cd ${DIR_CART}/tester && zip -r $@ . -x "*.c" -x "*.h" -x "*/.DS_Store"
 
 .PHONY: web
 web: ## Run development web-server
